@@ -1,0 +1,40 @@
+html, body {
+    background-color: black;
+    height: 100%;
+}
+
+#cronometro {
+    width: 500px;
+    height: 500px;
+    border-style: solid;
+    border-color: blue;
+    border-radius: 100%;
+    border-width: 10px;
+}
+
+#externa {
+	position:relative;
+    height: 100%;
+    width: 100%;
+    /* display flex */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* centraliza na vertical */
+    align-items: center;
+}
+
+#interna {
+    text-align: center;
+}
+
+div {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    color: white;
+}
