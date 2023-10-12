@@ -1,33 +1,37 @@
-html, body {
-    background-color: black;
-    height: 100%;
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: monospace;
+    color: white;
 }
 
-#cronometro {
-    width: 500px;
-    height: 500px;
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: black;
+}
+
+#borda {
+    width: 95vh;
+    height: 95vh;
     border-style: solid;
     border-color: blue;
     border-radius: 100%;
     border-width: 10px;
 }
 
-#externa {
-	position:relative;
+#div_externa {
     height: 100%;
     width: 100%;
-    /* display flex */
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-    /* centraliza na vertical */
     align-items: center;
-}
-
-#interna {
     text-align: center;
+    justify-content: center;
 }
 
 div {
@@ -37,4 +41,12 @@ div {
     margin-bottom: 10px;
     padding: 5px;
     color: white;
+}
+
+h1 {
+    font-size: 15vh;
+}
+
+h2 {
+    font-size: 5vh;
 }

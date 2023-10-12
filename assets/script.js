@@ -48,7 +48,7 @@ function imprimirRelogio(hora, horaTermino) {
         if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
     }
 
-    if (tempoRestante <= 308 && tempoRestante >= 306) {
+    if (tempoRestante >= 307 && tempoRestante <= 309) {
         audio5minutos.play();
     }
 
@@ -60,6 +60,10 @@ function imprimirRelogio(hora, horaTermino) {
         audioEncerramento.play();
     }
 
-    document.getElementById('tempo_restante').innerHTML = `${horasRestantes}:${minutosRestantes}:${segundosRestantes}`;
+    if (horasRestantes == 0) {
+        document.getElementById('tempo_restante').innerHTML = `${minutosRestantes}:${segundosRestantes}`;
+    }
+    else document.getElementById('tempo_restante').innerHTML = `${horasRestantes}:${minutosRestantes}:${segundosRestantes}`;
+
     document.getElementById('hora').innerHTML = `${horas}:${minutos}:${segundos}`;
 }
