@@ -1,12 +1,8 @@
-let audio5minutos;
-let audio1minuto;
-let audioEncerramento;
+let audio5minutos = new Audio("./assets/audios/encerramento_licao_5min.mp3");
+let audio1minuto = new Audio("./assets/audios/encerramento_licao_1min_1.mp3");
+let audioEncerramento = new Audio("./assets/audios/Beeper_Emergency_Call.mp3");
 
 async function relogio(horaTermino) {
-    
-    audio5minutos = document.getElementById('audio5min');
-    audio1minuto = document.getElementById('audio1min');
-    audioEncerramento = document.getElementById('audioEncer');
     
     while(true) {
         let hora;
@@ -26,9 +22,9 @@ async function relogio(horaTermino) {
 }
 
 function imprimirRelogio(hora, horaTermino) {
-    const horas = hora.getHours();
-    const minutos = hora.getMinutes().toString().length == 1 ? `0${hora.getMinutes().toString()}` : hora.getMinutes();
-    const segundos = hora.getSeconds().toString().length == 1 ? `0${hora.getSeconds().toString()}` : hora.getSeconds();;
+    let horas = hora.getHours();
+    let minutos = hora.getMinutes().toString().length == 1 ? `0${hora.getMinutes().toString()}` : hora.getMinutes();
+    let segundos = hora.getSeconds().toString().length == 1 ? `0${hora.getSeconds().toString()}` : hora.getSeconds();;
 
     let tempo = hora.getSeconds() + (hora.getMinutes() * 60) + (hora.getHours() * 3600);
     let tempoTermino = (horaTermino[1] * 60) + (horaTermino[0] * 3600);
@@ -65,5 +61,5 @@ function imprimirRelogio(hora, horaTermino) {
     }
     else document.getElementById('tempo_restante').innerHTML = `${horasRestantes}:${minutosRestantes}:${segundosRestantes}`;
 
-    document.getElementById('hora').innerHTML = `${horas}:${minutos}:${segundos}`;
+    document.getElementById('hora').innerHTML = `${horas}:${minutos}`;
 }

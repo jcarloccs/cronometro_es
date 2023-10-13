@@ -22,7 +22,7 @@ body {
     border-style: solid;
     border-color: blue;
     border-radius: 100%;
-    border-width: 10px;
+    border-width: 2vh;
 }
 
 #div_externa {
@@ -49,4 +49,8 @@ h1 {
 
 h2 {
     font-size: 5vh;
+}
+
+h1, h2 {
+    user-select: none;
 }
