@@ -1,9 +1,20 @@
-let audio5minutos = new Audio("./assets/audios/encerramento_licao_5min.mp3");
-let audio1minuto = new Audio("./assets/audios/encerramento_licao_1min_1.mp3");
-let audioEncerramento = new Audio("./assets/audios/Beeper_Emergency_Call.mp3");
+const audio5minutos = new Audio("./assets/audios/encerramento_licao_5min.mp3");
+const audio1minuto = new Audio("./assets/audios/encerramento_licao_1min_1.mp3");
+const audioEncerramento = new Audio("./assets/audios/Beeper_Emergency_Call.mp3");
+
+const textoTempo = document.getElementById("texto_tempo");
+const horarioElement = document.getElementById('hora');
+
+const informacoes = {
+    horasRest: document.getElementById("horas"),
+    minutosRest: document.getElementById("minutos"),
+    segundosRest: document.getElementById("segundos"),
+    doisPontos: document.querySelectorAll(".dois_pontos"),
+    horario: document.getElementById('hora')
+}
 
 async function relogio(horaTermino) {
-    
+
     while(true) {
         let hora;
         let retorno = new Promise((resolve, reject) => {
@@ -11,7 +22,11 @@ async function relogio(horaTermino) {
             let restante = 1000 - hora.getMilliseconds();
 
             setTimeout(() => {
+                informacoes.doisPontos.forEach((x) => x.classList.remove("piscar_dois_pontos"));
                 imprimirRelogio(hora, horaTermino);
+                setTimeout(() => {
+                    informacoes.doisPontos.forEach((x) => x.classList.add("piscar_dois_pontos"));
+                }, 500);
                 resolve();
             }, restante);
         });
@@ -57,9 +72,15 @@ function imprimirRelogio(hora, horaTermino) {
     }
 
     if (horasRestantes == 0) {
-        document.getElementById('tempo_restante').innerHTML = `${minutosRestantes}:${segundosRestantes}`;
+        informacoes.horasRest.innerText = "";
+        informacoes.doisPontos[0].classList.add("ocultar");
     }
-    else document.getElementById('tempo_restante').innerHTML = `${horasRestantes}:${minutosRestantes}:${segundosRestantes}`;
+    else {
+        informacoes.horasRest.innerText = `${horasRestantes}`;
+    }
 
-    document.getElementById('hora').innerHTML = `${horas}:${minutos}`;
+    informacoes.minutosRest.innerText = `${minutosRestantes}`;
+    informacoes.segundosRest.innerText = `${segundosRestantes}`;
+
+    informacoes.horario.innerText = `${horas}:${minutos}`;
 }
