@@ -15,7 +15,7 @@ const informacoes = {
 
 async function relogio(horaTermino) {
 
-    while(true) {
+    while (true) {
         let hora;
         let retorno = new Promise((resolve, reject) => {
             hora = new Date();
@@ -32,7 +32,7 @@ async function relogio(horaTermino) {
         });
 
         await retorno;
-    
+
     }
 }
 
@@ -43,7 +43,7 @@ function imprimirRelogio(hora, horaTermino) {
 
     let tempo = hora.getSeconds() + (hora.getMinutes() * 60) + (hora.getHours() * 3600);
     let tempoTermino = (horaTermino[1] * 60) + (horaTermino[0] * 3600);
-    
+
     let tempoRestante = tempoTermino - tempo;
 
     let horasRestantes = '0';
@@ -54,7 +54,7 @@ function imprimirRelogio(hora, horaTermino) {
         horasRestantes = Math.trunc(tempoRestante / 3600);
         minutosRestantes = Math.trunc(tempoRestante / 60) % 60;
         segundosRestantes = tempoRestante % 60;
-    
+
         if (minutosRestantes < 10) minutosRestantes = `0${minutosRestantes.toString()}`;
         if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
     }

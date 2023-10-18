@@ -26,17 +26,13 @@ body {
     background-color: black;
 }
 
-#borda {
+#relogio {
     width: 95vh;
     height: 95vh;
-    
+    position: relative;
 }
 
 #div_externa {
-    border-style: solid;
-    border-color: blue;
-    border-radius: 100%;
-    border-width: 2vh;
     height: 100%;
     width: 100%;
     display: flex;
@@ -57,7 +53,7 @@ body {
     width: 50vh;
 }
 
-img {
+img#logo_es {
     height: 20vh;
 }
 
@@ -76,4 +72,22 @@ h2 {
 
 .ocultar {
     display: none;
+}
+
+#desenhos {
+    border: 2px solid blue;
+    border-radius: 50%;
+    width: 95vh;
+    height: 95vh;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: -1;
+}
+
+#botao_relogio {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
 }

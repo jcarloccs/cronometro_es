@@ -10,11 +10,11 @@
 </head>
 
 <body>
-    <div id="borda">
+    <div id="relogio">
         <div id="div_externa">
             <div id="div_interna">
 
-                <img src="./assets/imgs/escola_sabatina.svg">
+                <img src="./assets/imgs/escola_sabatina.svg" id="logo_es">
                 <div id="texto_tempo">
                     <span id="horas" class="tempo_restante"></span>
                     <span class="dois_pontos tempo_restante">:</span>
@@ -24,12 +24,18 @@
                 </div>
                 <h2 id="hora"></h2>
                 <h2 id="texto_licao">Lição da Escola Sabatina</h2>
-                <button onclick="relogio([23, 59]);">relógio</button>
-                
             </div>
 
         </div>
-        <script defer src="assets/script.js"></script>
+    </div>
+    
+    <div id="desenhos">
+
+    </div>
+    
+    <button id="botao_relogio" onclick="relogio([23, 59]);">relógio</button>
+
+    <script defer src="assets/script.js"></script>
 </body>
 
 </html>
