@@ -13,6 +13,17 @@ const informacoes = {
     horario: document.getElementById('hora')
 }
 
+const desenhoRelogio = {
+    ponteiroMinutos: document.getElementById("ponteiro-minutos"),
+    ponteiroSegundos: document.getElementById("ponteiro-segundos"),
+    circuloExterno: document.getElementById("circulo-externo"),
+    circuloExterno: document.getElementById("bolinhas")
+}
+
+let tempoRestante;
+
+desenhoRelogio.ponteiroSegundos.style.transition = "500ms";
+
 async function relogio(horaTermino) {
 
     while (true) {
@@ -22,18 +33,24 @@ async function relogio(horaTermino) {
             let restante = 1000 - hora.getMilliseconds();
 
             setTimeout(() => {
-                informacoes.doisPontos.forEach((x) => x.classList.remove("piscar_dois_pontos"));
+                
                 imprimirRelogio(hora, horaTermino);
-                setTimeout(() => {
-                    informacoes.doisPontos.forEach((x) => x.classList.add("piscar_dois_pontos"));
-                }, 500);
                 resolve();
+
             }, restante);
         });
 
         await retorno;
-
     }
+}
+
+async function piscarDoisPontos() {
+    informacoes.doisPontos.forEach((x) => x.classList.remove("piscar_dois_pontos"));
+    setTimeout(() => {
+        if (tempoRestante > 0) {
+            informacoes.doisPontos.forEach((x) => x.classList.add("piscar_dois_pontos"));
+        }
+    }, 500);
 }
 
 function imprimirRelogio(hora, horaTermino) {
@@ -44,21 +61,54 @@ function imprimirRelogio(hora, horaTermino) {
     let tempo = hora.getSeconds() + (hora.getMinutes() * 60) + (hora.getHours() * 3600);
     let tempoTermino = (horaTermino[1] * 60) + (horaTermino[0] * 3600);
 
-    let tempoRestante = tempoTermino - tempo;
+    tempoRestante = tempoTermino - tempo;
 
-    let horasRestantes = '0';
-    let minutosRestantes = '00';
-    let segundosRestantes = '00';
+    if (tempoRestante >= 0) {
 
-    if (tempoRestante > 0) {
-        horasRestantes = Math.trunc(tempoRestante / 3600);
-        minutosRestantes = Math.trunc(tempoRestante / 60) % 60;
-        segundosRestantes = tempoRestante % 60;
+        let horasRestantes = '0';
+        let minutosRestantes = '00';
+        let segundosRestantes = '00';
 
-        if (minutosRestantes < 10) minutosRestantes = `0${minutosRestantes.toString()}`;
-        if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
+        if (tempoRestante > 0) {
+            horasRestantes = Math.trunc(tempoRestante / 3600);
+            minutosRestantes = Math.trunc(tempoRestante / 60) % 60;
+            segundosRestantes = tempoRestante % 60;
+
+            if (minutosRestantes < 10) minutosRestantes = `0${minutosRestantes.toString()}`;
+            if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
+        }
+
+        girarPonteiros(tempoRestante, segundosRestantes);
+
+        reproduzirAudios();
+
+        if (horasRestantes == 0) {
+            informacoes.horasRest.innerText = "";
+            informacoes.doisPontos[0].classList.add("ocultar");
+        }
+        else {
+            informacoes.horasRest.innerText = `${horasRestantes}`;
+        }
+
+        informacoes.minutosRest.innerText = `${minutosRestantes}`;
+        informacoes.segundosRest.innerText = `${segundosRestantes}`;
+
+        piscarDoisPontos();
     }
 
+    informacoes.horario.innerText = `${horas}:${minutos}`;
+}
+
+async function girarPonteiros(tempoRestante) {
+
+    let a = tempoRestante / 10;
+    let b = tempoRestante * 6;
+
+    desenhoRelogio.ponteiroMinutos.style.transform = `rotate(${a}deg)`;
+    desenhoRelogio.ponteiroSegundos.style.transform = `rotate(${b}deg)`;
+}
+
+async function reproduzirAudios() {
     if (tempoRestante >= 307 && tempoRestante <= 309) {
         audio5minutos.play();
     }
@@ -70,17 +120,4 @@ function imprimirRelogio(hora, horaTermino) {
     if (tempoRestante <= 0 && tempoRestante >= -2) {
         audioEncerramento.play();
     }
-
-    if (horasRestantes == 0) {
-        informacoes.horasRest.innerText = "";
-        informacoes.doisPontos[0].classList.add("ocultar");
-    }
-    else {
-        informacoes.horasRest.innerText = `${horasRestantes}`;
-    }
-
-    informacoes.minutosRest.innerText = `${minutosRestantes}`;
-    informacoes.segundosRest.innerText = `${segundosRestantes}`;
-
-    informacoes.horario.innerText = `${horas}:${minutos}`;
 }

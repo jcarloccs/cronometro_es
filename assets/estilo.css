@@ -6,16 +6,19 @@
     font-family: monospace;
     color: white;
     user-select: none;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 @keyframes piscar {
     0% {
-      color: rgba(255, 255, 255, 1);
+        color: rgba(255, 255, 255, 1);
     }
+
     100% {
         color: rgba(255, 255, 255, 0);
     }
-  }
+}
 
 body {
     height: 100vh;
@@ -75,8 +78,6 @@ h2 {
 }
 
 #desenhos {
-    border: 2px solid blue;
-    border-radius: 50%;
     width: 95vh;
     height: 95vh;
     margin: auto;
@@ -90,4 +91,15 @@ h2 {
     position: absolute;
     left: 10px;
     bottom: 10px;
+}
+
+.elementos svg {
+    width: inherit;
+    height: inherit;
+}
+
+.elementos {
+    width: 95vh;
+    height: 95vh;
+    position: absolute;
 }
