@@ -2,14 +2,14 @@ const audio5minutos = new Audio("./assets/audios/encerramento_licao_5min.mp3");
 const audio1minuto = new Audio("./assets/audios/encerramento_licao_1min_1.mp3");
 const audioEncerramento = new Audio("./assets/audios/Beeper_Emergency_Call.mp3");
 
-const textoTempo = document.getElementById("texto_tempo");
+const textoTempo = document.getElementById("texto-tempo");
 
 const informacoes = {
     horasRest: document.getElementById("horas"),
     minutosRest: document.getElementById("minutos"),
     segundosRest: document.getElementById("segundos"),
     doisPontos: document.querySelectorAll(".dois_pontos"),
-    horario: document.getElementById("horarios"),
+    horario: document.querySelectorAll(".horarios"),
     textoLicao: document.getElementById("texto-licao")
 }
 
@@ -142,7 +142,7 @@ async function relogio(horaTermino) {
     controles.fullscreen.style.display = "flex";
     controles.fullscreen.classList.remove("ocultar");
     controles.controles.style.height = "auto";
-    informacoes.horario.classList.remove("ocultar");
+    informacoes.horario.forEach((x) => x.classList.remove("ocultar"));
 
     let tempoRestanteInicial = new Date();
 
@@ -239,8 +239,8 @@ function imprimirRelogio(horaAtual, horaTermino) {
     let y = horaTermino[1];
     if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
 
-    informacoes.horario.innerText = `Hora agora = ${horas}:${minutos}:${segundos}
-    Encerra = ${horaTermino[0]}:${y}`;
+    informacoes.horario[0].innerText = `Hora atual = ${horas}:${minutos}:${segundos}`;
+    informacoes.horario[1].innerText = `Termina = ${horaTermino[0]}:${y}`;
 }
 
 async function girarPonteiros(tempoRestante) {
@@ -281,7 +281,7 @@ async function reproduzirAudios() {
         });
         desenhoRelogio.corCirculoInterno.style.fill = "#ff0000";
         desenhoRelogio.corCirculoInterno.style.transition = "5s";
-        informacoes.textoLicao.innerText = "Lição da Escola Sabatina Encerrada";
+        informacoes.textoLicao.innerText = "LIÇÃO DA ESCOLA SABATINA ENCERRADA";
         continuar = false;
     }
 }

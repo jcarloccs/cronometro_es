@@ -42,14 +42,13 @@ body {
 
 #texto-licao {
     width: 50vh;
-    word-spacing: 1vh;
-    letter-spacing: 0.5vh;
     font-weight: bold;
     margin: 2vh;
 }
 
 img#logo_es {
-    height: 20vh;
+    height: 12vh;
+    margin: 1vh;
 }
 
 h2 {
@@ -62,6 +61,7 @@ h2 {
     font-weight: bold;
     letter-spacing: 1vh;
     text-shadow: black 1vh 1vh 0.1vh;
+
 }
 
 .piscar_dois_pontos {
@@ -93,10 +93,7 @@ h2 {
     justify-content: space-between;
 }
 
-#horarios {
-    border: 1px solid white;
-    border-radius: 1vh;
-    padding: 1vh 3vh;
+.horarios {
     letter-spacing: 0.5vh;
     word-spacing: 1vh;
     font-weight: normal;
@@ -206,4 +203,11 @@ label {
     height: 5vh;
     width: 5vh;
     margin: 1vh;
+}
+
+#texto-tempo {
+    border: 0.1vh solid white;
+    border-radius: 2vh;
+    padding: 0.5vh 1vh;
+    min-width: 70vh;
 }
