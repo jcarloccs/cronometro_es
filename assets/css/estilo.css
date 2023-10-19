@@ -44,7 +44,8 @@ body {
     width: 50vh;
     word-spacing: 1vh;
     letter-spacing: 0.5vh;
-    font-weight: lighter;
+    font-weight: bold;
+    margin: 2vh;
 }
 
 img#logo_es {
@@ -52,7 +53,7 @@ img#logo_es {
 }
 
 h2 {
-    font-size: 5vh;
+    font-size: 4.5vh;
 }
 
 .tempo_restante {
@@ -60,6 +61,7 @@ h2 {
     text-align: center;
     font-weight: bold;
     letter-spacing: 1vh;
+    text-shadow: black 1vh 1vh 0.1vh;
 }
 
 .piscar_dois_pontos {
@@ -91,12 +93,15 @@ h2 {
     justify-content: space-between;
 }
 
-#hora-atual {
+#horarios {
     border: 1px solid white;
     border-radius: 1vh;
     padding: 1vh 3vh;
-    letter-spacing: 1vh;
-    font-weight: lighter;
+    letter-spacing: 0.5vh;
+    word-spacing: 1vh;
+    font-weight: normal;
+    box-sizing: border-box;
+    font-size: 5vh;
 }
 
 .controles {
@@ -177,7 +182,8 @@ label {
     font-weight: bold;
 }
 
-#botao-fullscreen:hover {
+#entrar-fullscreen:hover,
+#sair-fullscreen:hover {
     fill: yellow;
     margin: 2vh;
     height: 12vh;
@@ -193,7 +199,8 @@ label {
     margin: auto;
 }
 
-#botao-fullscreen {
+#entrar-fullscreen,
+#sair-fullscreen {
     fill: white;
     margin: 2vh;
     height: 5vh;

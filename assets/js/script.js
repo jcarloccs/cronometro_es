@@ -9,7 +9,7 @@ const informacoes = {
     minutosRest: document.getElementById("minutos"),
     segundosRest: document.getElementById("segundos"),
     doisPontos: document.querySelectorAll(".dois_pontos"),
-    horario: document.getElementById("hora-atual"),
+    horario: document.getElementById("horarios"),
     textoLicao: document.getElementById("texto-licao")
 }
 
@@ -34,10 +34,13 @@ const controles = {
     controles: document.getElementById("controles"),
     labels: document.querySelectorAll("label"),
     fieldsets: document.querySelectorAll("fieldset"),
-    botaoFullscreen: document.getElementById("botao-fullscreen")
+    botaoEntrarFullscreen: document.getElementById("entrar-fullscreen"),
+    botaoSairFullscreen: document.getElementById("sair-fullscreen")
 }
 
 let tempoRestante;
+
+let continuar = true;
 
 let elem = document.documentElement;
 
@@ -47,27 +50,56 @@ document.addEventListener("keydown", (x) => {
     }
 });
 
+function entrarFullscreen() {
+
+    controles.botaoEntrarFullscreen.classList.add("ocultar");
+    controles.botaoSairFullscreen.classList.remove("ocultar");
+
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+
+function sairFullscreen() {
+
+    controles.botaoEntrarFullscreen.classList.remove("ocultar");
+    controles.botaoSairFullscreen.classList.add("ocultar");
+
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+}
+
 function fullscreen() {
     if (document.fullscreenElement) {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { /* Safari */
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { /* IE11 */
-            document.msExitFullscreen();
-        }
+        sairFullscreen();
     } else {
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) { /* Safari */
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { /* IE11 */
-            elem.msRequestFullscreen();
-        }
+        entrarFullscreen();
+    }
+}
+
+async function visibilidadeBotoesFullScree() {
+    if (document.fullscreenElement) {
+        controles.botaoEntrarFullscreen.classList.add("ocultar");
+        controles.botaoSairFullscreen.classList.remove("ocultar");
+    } else {
+        controles.botaoEntrarFullscreen.classList.remove("ocultar");
+        controles.botaoSairFullscreen.classList.add("ocultar");
     }
 }
 
 async function iniciarHoraTermino() {
+
+    visibilidadeBotoesFullScree();
+
     if (campos.campoHoraTermino.value) {
         let horaTermino = campos.campoHoraTermino.value.split(":");
         relogio([Number(horaTermino[0]), Number(horaTermino[1])]);
@@ -75,6 +107,8 @@ async function iniciarHoraTermino() {
 }
 
 async function iniciarDuracao() {
+
+    visibilidadeBotoesFullScree();
 
     if ((campos.campoTempoLimiteHora.value > 0 || campos.campoTempoLimiteMinuto.value > 0) &&
         (campos.campoTempoLimiteHora.value || campos.campoTempoLimiteMinuto.value)) {
@@ -170,9 +204,8 @@ function imprimirRelogio(horaAtual, horaTermino) {
     let segundos = horaAtual.getSeconds().toString().length == 1 ? `0${horaAtual.getSeconds().toString()}` : horaAtual.getSeconds();
 
     tempoRestante = calculoTempoRestante(horaAtual, horaTermino);
-    console.log(tempoRestante);
 
-    if (tempoRestante >= 0) {
+    if (tempoRestante >= 0 && continuar) {
 
         let horasRestantes = '0';
         let minutosRestantes = '00';
@@ -202,8 +235,12 @@ function imprimirRelogio(horaAtual, horaTermino) {
 
         piscarDoisPontos();
     }
+    
+    let y = horaTermino[1];
+    if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
 
-    informacoes.horario.innerText = `${horas}:${minutos}`;
+    informacoes.horario.innerText = `Hora agora = ${horas}:${minutos}:${segundos}
+    Encerra = ${horaTermino[0]}:${y}`;
 }
 
 async function girarPonteiros(tempoRestante) {
@@ -245,5 +282,6 @@ async function reproduzirAudios() {
         desenhoRelogio.corCirculoInterno.style.fill = "#ff0000";
         desenhoRelogio.corCirculoInterno.style.transition = "5s";
         informacoes.textoLicao.innerText = "Lição da Escola Sabatina Encerrada";
+        continuar = false;
     }
 }
