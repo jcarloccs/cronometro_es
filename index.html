@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/estilo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;700&family=Changa:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Cronômetro da Lição da Escola Sabatina</title>
 </head>
 
@@ -177,19 +186,34 @@
     </div>
 
     <div id="controles">
-        <div id="hora-alvo" class="controles organizar">
-            <input type="time" class="controles" name="" id="hora-termino"/>
-            <button id="botao_terminio" class="controles" onclick="iniciarHoraTermino();">Iniciar</button>
-        </div>
-        
-        <div id="duracao" class="controles organizar">
-            <input class="controles" type="number" name="" id="hora" min="0">
-            <input class="controles" type="number" name="" id="minuto" min="0">
-            <button id="botao_tempo" class="controles" onclick="iniciarDuracao();">Iniciar</button>
-        </div>
 
-        <div class="controles ocultar" id="voltar">
-            <button class="controles" onclick="location.reload()">Voltar</button>
+        <fieldset>
+            <label for="">Hora para terminar</label>
+            <div id="hora-alvo" class="controles organizar">
+                <input type="time" class="controles" name="" id="hora-termino" />
+                <button id="botao_terminio" class="controles" onclick="iniciarHoraTermino();">Iniciar</button>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <label for="">Duração</label>
+            <div id="duracao" class="controles organizar">
+                <input class="controles" type="number" name="" id="hora" min="0">
+                <span>h</span>
+                <input class="controles" type="number" name="" id="minuto" min="0">
+                <span>m</span>
+                <button id="botao_tempo" class="controles" onclick="iniciarDuracao();">Iniciar</button>
+            </div>
+        </fieldset>
+
+        <div class="controles ocultar" id="fullscreen">
+
+            <svg id="botao-fullscreen" onclick="fullscreen();" xmlns="http://www.w3.org/2000/svg" height="24"
+                viewBox="0 -960 960 960" width="24">
+                <path
+                    d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" />
+            </svg>
+
         </div>
     </div>
 

@@ -30,12 +30,42 @@ const campos = {
 const controles = {
     horaLimite: document.getElementById("hora-alvo"),
     duracao: document.getElementById("duracao"),
-    voltar: document.getElementById("voltar"),
-    controles: document.getElementById("controles")
+    fullscreen: document.getElementById("fullscreen"),
+    controles: document.getElementById("controles"),
+    labels: document.querySelectorAll("label"),
+    fieldsets: document.querySelectorAll("fieldset"),
+    botaoFullscreen: document.getElementById("botao-fullscreen")
 }
 
 let tempoRestante;
 
+let elem = document.documentElement;
+
+document.addEventListener("keydown", (x) => {
+    if (x.key === "f") {
+        fullscreen();
+    }
+});
+
+function fullscreen() {
+    if (document.fullscreenElement) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+        }
+    } else {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    }
+}
 
 async function iniciarHoraTermino() {
     if (campos.campoHoraTermino.value) {
@@ -46,8 +76,8 @@ async function iniciarHoraTermino() {
 
 async function iniciarDuracao() {
 
-    if ((campos.campoTempoLimiteHora.value > 0 || campos.campoTempoLimiteMinuto.value > 0) && 
-    (campos.campoTempoLimiteHora.value || campos.campoTempoLimiteMinuto.value)) {
+    if ((campos.campoTempoLimiteHora.value > 0 || campos.campoTempoLimiteMinuto.value > 0) &&
+        (campos.campoTempoLimiteHora.value || campos.campoTempoLimiteMinuto.value)) {
 
         let duracaoHora = campos.campoTempoLimiteHora.value;
         let duracaoMinuto = campos.campoTempoLimiteMinuto.value;
@@ -73,7 +103,10 @@ async function relogio(horaTermino) {
     controles.horaLimite.classList.add("ocultar");
     controles.duracao.classList.remove("organizar");
     controles.duracao.classList.add("ocultar");
-    controles.voltar.classList.remove("ocultar");
+    controles.labels.forEach((x) => x.classList.add("ocultar"));
+    controles.fieldsets.forEach((x) => x.classList.add("ocultar"));
+    controles.fullscreen.style.display = "flex";
+    controles.fullscreen.classList.remove("ocultar");
     controles.controles.style.height = "auto";
     informacoes.horario.classList.remove("ocultar");
 
