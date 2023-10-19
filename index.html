@@ -187,19 +187,19 @@
     <div id="controles">
 
         <fieldset>
-            <label for="">Hora para terminar</label>
+            <label for="botao-termino">Hora para terminar</label>
             <div id="hora-alvo" class="controles organizar">
-                <input type="time" class="controles" name="" id="hora-termino" />
+                <input type="time" class="controles" name="" id="hora-termino" onkeypress="iniciarHoraTermino();"/>
                 <button id="botao_terminio" class="controles" onclick="iniciarHoraTermino();">Iniciar</button>
             </div>
         </fieldset>
 
         <fieldset>
-            <label for="">Duração</label>
+            <label for="hora">Duração</label>
             <div id="duracao" class="controles organizar">
-                <input class="controles" type="number" name="" id="hora" min="0">
+                <input class="controles" type="number" name="" id="hora" min="0" onkeypress="iniciarDuracao();">
                 <span>h</span>
-                <input class="controles" type="number" name="" id="minuto" min="0">
+                <input class="controles" type="number" name="" id="minuto" min="0" onkeypress="iniciarDuracao();">
                 <span>m</span>
                 <button id="botao_tempo" class="controles" onclick="iniciarDuracao();">Iniciar</button>
             </div>
