@@ -3,7 +3,7 @@
     padding: 0;
     outline: none;
     box-sizing: border-box;
-    font-family: monospace;
+    font-family: sans-serif;
     color: white;
     user-select: none;
     overflow-y: hidden;
@@ -52,7 +52,7 @@ body {
     justify-content: space-between;
 }
 
-#texto_licao {
+#texto-licao {
     width: 50vh;
 }
 
@@ -87,10 +87,30 @@ h2 {
     z-index: -1;
 }
 
-#botao_relogio {
+#controles {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     left: 10px;
     bottom: 10px;
+    height: 15vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#hora-atual {
+    border: 1px solid white;
+    border-radius: 1vh;
+    padding: 1vh 3vh;
+}
+
+.controles {
+    color: black;
+    padding: 1vh;
+}
+
+#duracao input {
+    width: 10vh;
 }
 
 .elementos svg {
@@ -102,4 +122,39 @@ h2 {
     width: 95vh;
     height: 95vh;
     position: absolute;
+}
+
+#ponteiro-segundos {
+    transition: 500ms;
+}
+
+.organizar {
+    display: block;
+}
+
+#voltar button {
+    background-color: black;
+    border: 0.5vh solid rgba(255, 255, 255, 0.103);
+    border-radius: 1vh;
+    color: rgba(255, 255, 255, 0.192);
+    font-size: 2vh;
+}
+
+#voltar button:hover, 
+#hora-alvo button,
+#duracao button {
+    background-color: black;
+    border: 0.5vh solid rgb(255, 255, 255);
+    border-radius: 1vh;
+    color: rgb(255, 255, 255);
+    font-size: 2vh;
+}
+
+#hora-alvo input,
+#duracao input {
+    background-color: white;
+    border-radius: 1vh;
+    color: black;
+    font-size: 2vh;
+    font-weight: bold;
 }

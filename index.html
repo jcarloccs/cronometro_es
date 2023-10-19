@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/estilo.css">
-    <title>Cronômetro Escola Sabatina</title>
+    <title>Cronômetro da Lição da Escola Sabatina</title>
 </head>
 
 <body>
@@ -16,14 +16,14 @@
 
                 <img src="./assets/imgs/escola_sabatina.svg" id="logo_es">
                 <div id="texto_tempo">
-                    <span id="horas" class="tempo_restante"></span>
+                    <span id="horas" class="tempo_restante">00</span>
                     <span class="dois_pontos tempo_restante">:</span>
-                    <span id="minutos" class="tempo_restante"></span>
+                    <span id="minutos" class="tempo_restante">00</span>
                     <span class="dois_pontos tempo_restante">:</span>
-                    <span id="segundos" class="tempo_restante"></span>
+                    <span id="segundos" class="tempo_restante">00</span>
                 </div>
-                <h2 id="hora"></h2>
-                <h2 id="texto_licao">Lição da Escola Sabatina</h2>
+                <h2 id="hora-atual" class="ocultar"></h2>
+                <h2 id="texto-licao">Lição da Escola Sabatina</h2>
             </div>
 
         </div>
@@ -155,17 +155,43 @@
                 <defs id="defs1" />
                 <g id="layer3" style="display:inline">
                     <circle
-                        style="display:inline;fill:#0000ff;fill-opacity:0.1;stroke:none;stroke-width:11.9481;stroke-dasharray:none"
+                        style="display:inline;fill:none;fill-opacity:0.1;stroke:none;stroke-width:11.9481;stroke-dasharray:none"
                         id="path18-1" cx="132.29166" cy="132.29166" r="121.70832" />
                     <rect
                         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.269576;stroke-dasharray:none;stroke-opacity:1"
                         id="rect28" width="2.6458282" height="9.5502663" x="130.96873" y="13.210144" ry="1.3229165" />
                 </g>
             </svg>
-        </div>   
+        </div>
+        <div class="elementos" id="circulo-interno">
+            <svg width="1000" height="1000" viewBox="0 0 264.5833 264.5833" version="1.1" id="svg1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                <defs id="defs1" />
+                <g id="layer3" style="display:inline">
+                    <circle
+                        style="display:inline;fill:#0000ff;fill-opacity:0.05;stroke:none;stroke-width:11.9481;stroke-dasharray:none"
+                        id="path18-1" cx="132.29166" cy="132.29166" r="121.70832" />
+                </g>
+            </svg>
+        </div>
     </div>
 
-    <button id="botao_relogio" onclick="relogio([17, 17]);">relógio</button>
+    <div id="controles">
+        <div id="hora-alvo" class="controles organizar">
+            <input type="time" class="controles" name="" id="hora-termino"/>
+            <button id="botao_terminio" class="controles" onclick="iniciarHoraTermino();">Iniciar</button>
+        </div>
+        
+        <div id="duracao" class="controles organizar">
+            <input class="controles" type="number" name="" id="hora" min="0">
+            <input class="controles" type="number" name="" id="minuto" min="0">
+            <button id="botao_tempo" class="controles" onclick="iniciarDuracao();">Iniciar</button>
+        </div>
+
+        <div class="controles ocultar" id="voltar">
+            <button class="controles" onclick="location.reload()">Voltar</button>
+        </div>
+    </div>
 
     <script defer src="assets/script.js"></script>
 </body>

@@ -3,38 +3,105 @@ const audio1minuto = new Audio("./assets/audios/encerramento_licao_1min_1.mp3");
 const audioEncerramento = new Audio("./assets/audios/Beeper_Emergency_Call.mp3");
 
 const textoTempo = document.getElementById("texto_tempo");
-const horarioElement = document.getElementById('hora');
 
 const informacoes = {
     horasRest: document.getElementById("horas"),
     minutosRest: document.getElementById("minutos"),
     segundosRest: document.getElementById("segundos"),
     doisPontos: document.querySelectorAll(".dois_pontos"),
-    horario: document.getElementById('hora')
+    horario: document.getElementById("hora-atual"),
+    textoLicao: document.getElementById("texto-licao")
 }
 
 const desenhoRelogio = {
     ponteiroMinutos: document.getElementById("ponteiro-minutos"),
     ponteiroSegundos: document.getElementById("ponteiro-segundos"),
-    circuloExterno: document.getElementById("circulo-externo"),
-    circuloExterno: document.getElementById("bolinhas")
+    corCirculoExterno: document.getElementById("circulo-externo").querySelectorAll("stop"),
+    corCirculoInterno: document.getElementById("circulo-interno").querySelector("circle"),
+    bolinhas: document.getElementById("bolinhas")
+}
+
+const campos = {
+    campoHoraTermino: document.getElementById("hora-termino"),
+    campoTempoLimiteHora: document.getElementById("hora"),
+    campoTempoLimiteMinuto: document.getElementById("minuto")
+}
+
+const controles = {
+    horaLimite: document.getElementById("hora-alvo"),
+    duracao: document.getElementById("duracao"),
+    voltar: document.getElementById("voltar"),
+    controles: document.getElementById("controles")
 }
 
 let tempoRestante;
 
-desenhoRelogio.ponteiroSegundos.style.transition = "500ms";
+
+async function iniciarHoraTermino() {
+    if (campos.campoHoraTermino.value) {
+        let horaTermino = campos.campoHoraTermino.value.split(":");
+        relogio([Number(horaTermino[0]), Number(horaTermino[1])]);
+    }
+}
+
+async function iniciarDuracao() {
+
+    if ((campos.campoTempoLimiteHora.value > 0 || campos.campoTempoLimiteMinuto.value > 0) && 
+    (campos.campoTempoLimiteHora.value || campos.campoTempoLimiteMinuto.value)) {
+
+        let duracaoHora = campos.campoTempoLimiteHora.value;
+        let duracaoMinuto = campos.campoTempoLimiteMinuto.value;
+
+        let agora = new Date();
+
+        agora = (agora.getHours() * 60) + agora.getMinutes();
+        let limite = (Number(duracaoHora) * 60) + Number(duracaoMinuto);
+        let horarioLimite = agora + limite;
+
+        let hora = Math.trunc(horarioLimite / 60);
+        let minuto = horarioLimite % 60;
+
+        relogio([hora, minuto]);
+
+    }
+
+}
 
 async function relogio(horaTermino) {
 
+    controles.horaLimite.classList.remove("organizar");
+    controles.horaLimite.classList.add("ocultar");
+    controles.duracao.classList.remove("organizar");
+    controles.duracao.classList.add("ocultar");
+    controles.voltar.classList.remove("ocultar");
+    controles.controles.style.height = "auto";
+    informacoes.horario.classList.remove("ocultar");
+
+    let tempoRestanteInicial = new Date();
+
+    if (calculoTempoRestante(tempoRestanteInicial, horaTermino) <= 300) {
+        desenhoRelogio.corCirculoExterno.forEach((x) => {
+            x.style.stopColor = "#00ff00";
+        });
+        desenhoRelogio.corCirculoInterno.style.fill = "#00ff00";
+    }
+
+    if (calculoTempoRestante(tempoRestanteInicial, horaTermino) <= 60) {
+        desenhoRelogio.corCirculoExterno.forEach((x) => {
+            x.style.stopColor = "#ffff00";
+        });
+        desenhoRelogio.corCirculoInterno.style.fill = "#ffff00";
+    }
+
     while (true) {
-        let hora;
+        let horaAtual;
         let retorno = new Promise((resolve, reject) => {
-            hora = new Date();
-            let restante = 1000 - hora.getMilliseconds();
+            horaAtual = new Date();
+            let restante = 1000 - horaAtual.getMilliseconds();
 
             setTimeout(() => {
-                
-                imprimirRelogio(hora, horaTermino);
+
+                imprimirRelogio(horaAtual, horaTermino);
                 resolve();
 
             }, restante);
@@ -53,15 +120,19 @@ async function piscarDoisPontos() {
     }, 500);
 }
 
-function imprimirRelogio(hora, horaTermino) {
-    let horas = hora.getHours();
-    let minutos = hora.getMinutes().toString().length == 1 ? `0${hora.getMinutes().toString()}` : hora.getMinutes();
-    let segundos = hora.getSeconds().toString().length == 1 ? `0${hora.getSeconds().toString()}` : hora.getSeconds();;
-
-    let tempo = hora.getSeconds() + (hora.getMinutes() * 60) + (hora.getHours() * 3600);
+function calculoTempoRestante(horas, horaTermino) {
+    let tempo = horas.getSeconds() + (horas.getMinutes() * 60) + (horas.getHours() * 3600);
     let tempoTermino = (horaTermino[1] * 60) + (horaTermino[0] * 3600);
 
-    tempoRestante = tempoTermino - tempo;
+    return tempoTermino - tempo;
+}
+
+function imprimirRelogio(horaAtual, horaTermino) {
+    let horas = horaAtual.getHours();
+    let minutos = horaAtual.getMinutes().toString().length == 1 ? `0${horaAtual.getMinutes().toString()}` : horaAtual.getMinutes();
+    let segundos = horaAtual.getSeconds().toString().length == 1 ? `0${horaAtual.getSeconds().toString()}` : horaAtual.getSeconds();
+
+    tempoRestante = calculoTempoRestante(horaAtual, horaTermino);
 
     if (tempoRestante >= 0) {
 
@@ -69,14 +140,12 @@ function imprimirRelogio(hora, horaTermino) {
         let minutosRestantes = '00';
         let segundosRestantes = '00';
 
-        if (tempoRestante > 0) {
-            horasRestantes = Math.trunc(tempoRestante / 3600);
-            minutosRestantes = Math.trunc(tempoRestante / 60) % 60;
-            segundosRestantes = tempoRestante % 60;
+        horasRestantes = Math.trunc(tempoRestante / 3600);
+        minutosRestantes = Math.trunc(tempoRestante / 60) % 60;
+        segundosRestantes = tempoRestante % 60;
 
-            if (minutosRestantes < 10) minutosRestantes = `0${minutosRestantes.toString()}`;
-            if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
-        }
+        if (minutosRestantes < 10) minutosRestantes = `0${minutosRestantes.toString()}`;
+        if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
 
         girarPonteiros(tempoRestante, segundosRestantes);
 
@@ -111,13 +180,32 @@ async function girarPonteiros(tempoRestante) {
 async function reproduzirAudios() {
     if (tempoRestante >= 307 && tempoRestante <= 309) {
         audio5minutos.play();
+        desenhoRelogio.corCirculoExterno.forEach((x) => {
+            x.style.transition = "10s";
+            x.style.stopColor = "#00ff00";
+        });
+        desenhoRelogio.corCirculoInterno.style.fill = "#00ff00";
+        desenhoRelogio.corCirculoInterno.style.transition = "10s";
     }
 
     if (tempoRestante <= 68 && tempoRestante >= 66) {
         audio1minuto.play();
+        desenhoRelogio.corCirculoExterno.forEach((x) => {
+            x.style.transition = "10s";
+            x.style.stopColor = "#ffff00";
+        });
+        desenhoRelogio.corCirculoInterno.style.fill = "#ffff00";
+        desenhoRelogio.corCirculoInterno.style.transition = "10s";
     }
 
     if (tempoRestante <= 0 && tempoRestante >= -2) {
         audioEncerramento.play();
+        desenhoRelogio.corCirculoExterno.forEach((x) => {
+            x.style.transition = "5s";
+            x.style.stopColor = "#ff0000";
+        });
+        desenhoRelogio.corCirculoInterno.style.fill = "#ff0000";
+        desenhoRelogio.corCirculoInterno.style.transition = "5s";
+        informacoes.textoLicao.innerText = "Lição da Escola Sabatina Encerrada";
     }
 }
