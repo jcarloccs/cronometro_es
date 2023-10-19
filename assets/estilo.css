@@ -148,24 +148,28 @@ h2 {
     display: block;
 }
 
-#voltar button {
-    background-color: black;
-    border: 0.5vh solid rgba(255, 255, 255, 0.103);
-    border-radius: 1vh;
-    color: rgba(255, 255, 255, 0.192);
-    font-size: 3vh;
-    font-family: 'Changa', sans-serif;
-}
-
-#voltar button:hover, 
 #hora-alvo button,
 #duracao button {
     background-color: black;
-    border: 0.5vh solid rgb(255, 255, 255);
+    border: 0.2vh solid rgb(255, 255, 255);
     border-radius: 1vh;
     color: rgb(255, 255, 255);
     font-size: 3vh;
     font-family: 'Changa', sans-serif;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+
+#hora-alvo button:hover,
+#duracao button:hover {
+    background-color: rgb(63, 63, 63);
+    border: 0.2vh solid rgb(255, 255, 255);
+    border-radius: 1vh;
+    color: rgb(255, 255, 255);
+    font-size: 3vh;
+    font-family: 'Changa', sans-serif;
+    padding-left: 2vh;
+    padding-right: 2vh;
 }
 
 #hora-alvo input,
@@ -176,11 +180,6 @@ h2 {
     font-size: 3vh;
     font-weight: bold;
     font-family: 'Changa', sans-serif;
-    padding-left: 2vh;
-    padding-right: 2vh;
-}
-
-button {
     padding-left: 2vh;
     padding-right: 2vh;
 }

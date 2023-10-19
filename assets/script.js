@@ -157,7 +157,11 @@ function calculoTempoRestante(horas, horaTermino) {
     let tempo = horas.getSeconds() + (horas.getMinutes() * 60) + (horas.getHours() * 3600);
     let tempoTermino = (horaTermino[1] * 60) + (horaTermino[0] * 3600);
 
-    return tempoTermino - tempo;
+    if (tempoTermino >= tempo) {
+        return tempoTermino - tempo;
+    } else {
+        return (tempoTermino + 86400) - tempo;
+    }
 }
 
 function imprimirRelogio(horaAtual, horaTermino) {
@@ -166,6 +170,7 @@ function imprimirRelogio(horaAtual, horaTermino) {
     let segundos = horaAtual.getSeconds().toString().length == 1 ? `0${horaAtual.getSeconds().toString()}` : horaAtual.getSeconds();
 
     tempoRestante = calculoTempoRestante(horaAtual, horaTermino);
+    console.log(tempoRestante);
 
     if (tempoRestante >= 0) {
 
