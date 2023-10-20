@@ -186,19 +186,21 @@ async function iniciarDuracao() {
 
 async function relogio(horaTermino) {
 
+    document.querySelector("body").addEventListener("dblclick", fullscreen);
+
     mostrarChecker = true;
 
     let y = horaTermino[1];
     if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
     informacoes.horario[1].innerText = `Termina às ${horaTermino[0]}:${y}`;
 
+    // mostrar ou ocultar os controles
     controles.horaLimite.classList.remove("organizar");
     controles.horaLimite.classList.add("ocultar");
     controles.duracao.classList.remove("organizar");
     controles.duracao.classList.add("ocultar");
     controles.labels.forEach((x) => x.classList.add("ocultar"));
     controles.fieldsets.forEach((x) => x.classList.add("ocultar"));
-
     controles.fullscreen.style.display = "flex";
     controles.fullscreen.classList.remove("ocultar");
     controles.zerar.style.display = "flex";
@@ -208,7 +210,6 @@ async function relogio(horaTermino) {
         controles.onOff2Tela.classList.remove("ocultar");
     }
     controles.controles.style.height = "auto";
-
     informacoes.horario.forEach((x) => x.classList.remove("ocultar"));
 
     let tempoRestanteInicial = new Date();

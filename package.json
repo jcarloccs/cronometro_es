@@ -1,7 +1,7 @@
 {
   "name": "cronometro-es",
   "version": "1.0.0",
-  "description": "cronometro-licao-escola-sabatina",
+  "description": "Cronômetro da Lição da Escola Sabatina",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
