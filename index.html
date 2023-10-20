@@ -10,13 +10,6 @@
     <link rel="stylesheet" href="assets/css/estilo.css">
     <link rel="stylesheet" href="assets/css/reset.css">
 
-    <!-- fontes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;700&family=Changa:wght@300;400;500;700&family=Chivo+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-
     <title>Cronômetro ES - Tela cheia: "F"</title>
 </head>
 
@@ -208,6 +201,10 @@
             </div>
         </fieldset>
 
+        <div class="controles ocultar" id="voltar">
+            <button id="botao-voltar" class="controles" onclick="location.reload()">Voltar</button>
+        </div>
+
         <div class="controles ocultar" id="fullscreen">
 
             <svg id="entrar-fullscreen" onclick="entrarFullscreen();" xmlns="http://www.w3.org/2000/svg" height="24"
@@ -223,6 +220,7 @@
             </svg>
 
         </div>
+
     </div>
 
     <script defer src="assets/js/script.js"></script>

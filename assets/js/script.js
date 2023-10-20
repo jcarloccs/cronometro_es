@@ -35,7 +35,8 @@ const controles = {
     labels: document.querySelectorAll("label"),
     fieldsets: document.querySelectorAll("fieldset"),
     botaoEntrarFullscreen: document.getElementById("entrar-fullscreen"),
-    botaoSairFullscreen: document.getElementById("sair-fullscreen")
+    botaoSairFullscreen: document.getElementById("sair-fullscreen"),
+    voltar: document.getElementById("voltar")
 }
 
 let tempoRestante;
@@ -143,9 +144,13 @@ async function relogio(horaTermino) {
     controles.duracao.classList.add("ocultar");
     controles.labels.forEach((x) => x.classList.add("ocultar"));
     controles.fieldsets.forEach((x) => x.classList.add("ocultar"));
+
     controles.fullscreen.style.display = "flex";
     controles.fullscreen.classList.remove("ocultar");
+    controles.voltar.style.display = "flex";
+    controles.voltar.classList.remove("ocultar");
     controles.controles.style.height = "auto";
+
     informacoes.horario.forEach((x) => x.classList.remove("ocultar"));
 
     let tempoRestanteInicial = new Date();

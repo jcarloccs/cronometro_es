@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'Chivo Mono';
+    src: url(../fonts/Chivo_Mono/ChivoMono-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: 'Changa';
+    src: url(../fonts/Changa/Changa-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: 'Chakra Petch';
+    src: url(../fonts/Chakra_Petch/ChakraPetch-Regular.ttf);
+}
+
 @keyframes piscar {
     0% {
         color: rgba(255, 255, 255, 1);
@@ -101,11 +116,6 @@ h2 {
     font-size: 5vh;
 }
 
-.controles {
-    color: black;
-    text-align: center;
-}
-
 #duracao input {
     width: 12vh;
 }
@@ -129,8 +139,7 @@ h2 {
     display: block;
 }
 
-#hora-alvo button,
-#duracao button {
+button {
     background-color: black;
     border: 0.2vh solid rgb(255, 255, 255);
     border-radius: 1vh;
@@ -141,8 +150,7 @@ h2 {
     padding-right: 2vh;
 }
 
-#hora-alvo button:hover,
-#duracao button:hover {
+button:hover {
     background-color: rgb(63, 63, 63);
     border: 0.2vh solid rgb(255, 255, 255);
     border-radius: 1vh;
@@ -151,6 +159,30 @@ h2 {
     font-family: 'Changa', sans-serif;
     padding-left: 2vh;
     padding-right: 2vh;
+}
+
+#voltar button {
+    background-color: black;
+    border: 0.2vh solid rgb(255, 255, 255);
+    border-radius: 1vh;
+    color: rgb(255, 255, 255);
+    font-size: 3vh;
+    font-family: 'Changa', sans-serif;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    opacity: 0.2;
+}
+
+#voltar button:hover {
+    background-color: black;
+    border: 0.2vh solid rgb(255, 255, 0);
+    border-radius: 1vh;
+    color: rgb(255, 255, 255);
+    font-size: 3vh;
+    font-family: 'Changa', sans-serif;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    opacity: 1;
 }
 
 #hora-alvo input,
