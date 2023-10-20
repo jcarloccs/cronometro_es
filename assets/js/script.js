@@ -4,6 +4,8 @@ const audioEncerramento = new Audio("./assets/audios/Beeper_Emergency_Call.mp3")
 
 const textoTempo = document.getElementById("texto-tempo");
 
+let mostrarChecker = false;
+
 const informacoes = {
     horasRest: document.getElementById("horas"),
     minutosRest: document.getElementById("minutos"),
@@ -36,7 +38,29 @@ const controles = {
     fieldsets: document.querySelectorAll("fieldset"),
     botaoEntrarFullscreen: document.getElementById("entrar-fullscreen"),
     botaoSairFullscreen: document.getElementById("sair-fullscreen"),
-    voltar: document.getElementById("voltar")
+    zerar: document.getElementById("zerar"),
+    onOff2Tela: document.getElementById("on-off-2-tela"),
+    checker2Tela: document.getElementById("checker-2-tela"),
+    text2Tela: document.getElementById("checker-2-tela")
+}
+
+const funcoesEletronJS = {
+    mostrarMenu: () => {
+        if (document.fullscreenElement && window.funcoesWinElectron) window.funcoesWinElectron.mostrarMenu();
+    },
+    ocultarMenu: () => {
+        if (!document.fullscreenElement && window.funcoesWinElectron) window.funcoesWinElectron.ocultarMenu();
+    },
+    paraSegundaTela: () => {
+        if (window.funcoesWinElectron && controles.checker2Tela.checked) {
+            window.funcoesWinElectron.irParaSegundaTela();
+        }
+    },
+    sairSegundaTela: () => {
+        if (window.funcoesWinElectron && controles.checker2Tela.checked) {
+            window.funcoesWinElectron.sairDaSegundaTela();
+        }
+    }
 }
 
 let tempoRestante;
@@ -49,12 +73,25 @@ document.addEventListener("keydown", (x) => {
     if (x.key === "f") {
         fullscreen();
     }
+    else if (x.key === "Escape") {
+        sairFullscreen();
+    }
 });
+
+controles.zerar.addEventListener("click", () => {
+    sairFullscreen();
+    location.reload();
+})
 
 function entrarFullscreen() {
 
     controles.botaoEntrarFullscreen.classList.add("ocultar");
     controles.botaoSairFullscreen.classList.remove("ocultar");
+
+    controles.onOff2Tela.style.removeProperty("display");
+    controles.onOff2Tela.classList.add("ocultar");
+    
+    funcoesEletronJS.paraSegundaTela();
 
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
@@ -63,12 +100,19 @@ function entrarFullscreen() {
     } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
     }
+
+    funcoesEletronJS.ocultarMenu();
 }
 
 function sairFullscreen() {
 
     controles.botaoEntrarFullscreen.classList.remove("ocultar");
     controles.botaoSairFullscreen.classList.add("ocultar");
+    
+    if (mostrarChecker) {
+        controles.onOff2Tela.style.display = "flex";
+        controles.onOff2Tela.classList.remove("ocultar");
+    }
 
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -77,6 +121,10 @@ function sairFullscreen() {
     } else if (document.msExitFullscreen) { /* IE11 */
         document.msExitFullscreen();
     }
+
+    funcoesEletronJS.sairSegundaTela();
+
+    funcoesEletronJS.mostrarMenu();
 }
 
 function fullscreen() {
@@ -90,12 +138,14 @@ function fullscreen() {
 }
 
 async function visibBotoesFullScreen() {
-    if (document.fullscreenElement) {
-        controles.botaoEntrarFullscreen.classList.add("ocultar");
-        controles.botaoSairFullscreen.classList.remove("ocultar");
-    } else {
+
+    if (document.exitFullscreen) {
         controles.botaoEntrarFullscreen.classList.remove("ocultar");
         controles.botaoSairFullscreen.classList.add("ocultar");
+
+    } else {
+        controles.botaoEntrarFullscreen.classList.add("ocultar");
+        controles.botaoSairFullscreen.classList.remove("ocultar");
     }
 }
 
@@ -136,6 +186,8 @@ async function iniciarDuracao() {
 
 async function relogio(horaTermino) {
 
+    mostrarChecker = true;
+
     let y = horaTermino[1];
     if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
     informacoes.horario[1].innerText = `Termina às ${horaTermino[0]}:${y}`;
@@ -149,8 +201,12 @@ async function relogio(horaTermino) {
 
     controles.fullscreen.style.display = "flex";
     controles.fullscreen.classList.remove("ocultar");
-    controles.voltar.style.display = "flex";
-    controles.voltar.classList.remove("ocultar");
+    controles.zerar.style.display = "flex";
+    controles.zerar.classList.remove("ocultar");
+    if (!document.fullscreenElement) {
+        controles.onOff2Tela.style.display = "flex";
+        controles.onOff2Tela.classList.remove("ocultar");
+    }
     controles.controles.style.height = "auto";
 
     informacoes.horario.forEach((x) => x.classList.remove("ocultar"));
@@ -292,3 +348,4 @@ async function reproduzirAudios() {
         continuar = false;
     }
 }
+

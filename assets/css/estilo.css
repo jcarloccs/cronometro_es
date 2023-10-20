@@ -161,7 +161,7 @@ button:hover {
     padding-right: 2vh;
 }
 
-#voltar button {
+#zerar button {
     background-color: black;
     border: 0.2vh solid rgb(255, 255, 255);
     border-radius: 1vh;
@@ -173,7 +173,7 @@ button:hover {
     opacity: 0.2;
 }
 
-#voltar button:hover {
+#zerar button:hover {
     background-color: black;
     border: 0.2vh solid rgb(255, 255, 0);
     border-radius: 1vh;
@@ -183,6 +183,50 @@ button:hover {
     padding-left: 2vh;
     padding-right: 2vh;
     opacity: 1;
+}
+
+#on-off-2-tela {
+    margin-top: 4vh;    
+}
+
+#on-off-2-tela span,
+#on-off-2-tela input {
+    margin: 0 1vh 0 1vh;
+}
+
+#checker-2-tela {
+    all: unset;
+    width: 3vh;
+    height: 3vh;
+    background: #EEE;
+    cursor: pointer;
+    border-radius: 1vh;
+    border: 0.5vh solid white;
+}
+
+#checker-2-tela:hover {
+    width: 3vh;
+    height: 3vh;
+    background: #EEE;
+    cursor: pointer;
+    border-radius: 1vh;
+    border: 0.5vh solid rgb(14, 126, 201);
+}
+
+#checker-2-tela:checked {
+    background-color: rgb(14, 126, 201);
+    border: 0.5vh solid white;
+}
+
+#checker-2-tela:checked:hover {
+    background-color: rgb(14, 126, 201);
+    border: 0.5vh solid rgb(14, 126, 201);
+}
+
+#on-off-2-tela span {
+    font-size: 2.5vh;
+    letter-spacing: 0.3vh;
+    font-family: 'Changa', sans-serif;
 }
 
 #hora-alvo input,
@@ -214,10 +258,8 @@ label {
 #entrar-fullscreen:hover,
 #sair-fullscreen:hover {
     fill: yellow;
-    margin: 2vh;
-    height: 12vh;
-    width: 12vh;
-    margin: 1vh;
+    height: 15vh;
+    width: 15vh;
 }
 
 #fullscreen {
@@ -234,7 +276,6 @@ label {
     margin: 2vh;
     height: 5vh;
     width: 5vh;
-    margin: 1vh;
 }
 
 #texto-tempo {

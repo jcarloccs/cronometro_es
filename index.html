@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="assets/css/estilo.css">
     <link rel="stylesheet" href="assets/css/reset.css">
 
-    <title>Cronômetro ES - Tela cheia: "F"</title>
+    <title>Cronômetro da Escola Sabatina</title>
 </head>
 
 <body ondblclick="fullscreen();">
@@ -201,8 +201,13 @@
             </div>
         </fieldset>
 
-        <div class="controles ocultar" id="voltar">
-            <button id="botao-voltar" class="controles" onclick="location.reload()">Voltar</button>
+        <div class="controles ocultar" id="zerar">
+            <button id="botao-zerar" class="controles">Zerar</button>
+        </div>
+
+        <div class="controles ocultar" id="on-off-2-tela">
+            <input type="checkbox" class="controles" name="" checked id="checker-2-tela">
+            <span id="text-2-tela">2º TELA</span>
         </div>
 
         <div class="controles ocultar" id="fullscreen">
@@ -224,7 +229,6 @@
     </div>
 
     <script defer src="assets/js/script.js"></script>
-    <script src="./renderer.js"></script>
 </body>
 
 </html>

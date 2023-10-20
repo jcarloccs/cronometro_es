@@ -14,8 +14,6 @@ const createWindow = () => {
     });
 
     win.loadFile('index.html');
-
-
 };
 
 // dispara a criação da janela
@@ -31,19 +29,20 @@ app.whenReady().then(() => {
 
     ipcMain.handle('irParaSegundaTela', () => {
 
+        win.restore();
         let displays = screen.getAllDisplays();
         let externalDisplay = displays.find((display) => {
             return display.bounds.x !== 0 || display.bounds.y !== 0
         });
-
-        win.setPosition(externalDisplay.bounds.x + 50, externalDisplay.bounds.y + 50);
-
+        if(externalDisplay) {
+            win.setPosition(externalDisplay.bounds.x + 50, externalDisplay.bounds.y + 50);
+        }
+        
     });
 
     ipcMain.handle('sairDaSegundaTela', () => {
-
-        win.setPosition(100, 200);
-
+        win.restore();
+        win.setPosition(50, 50);
     });
 
 });
