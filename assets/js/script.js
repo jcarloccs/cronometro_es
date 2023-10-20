@@ -80,11 +80,13 @@ function sairFullscreen() {
 }
 
 function fullscreen() {
+
     if (document.fullscreenElement) {
         sairFullscreen();
     } else {
         entrarFullscreen();
     }
+
 }
 
 async function visibBotoesFullScreen() {

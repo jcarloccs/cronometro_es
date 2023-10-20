@@ -1,9 +1,11 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain, screen } = require('electron')
 const path = require('node:path')
+
+let win;
 
 // criar janela
 const createWindow = () => {
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -11,13 +13,39 @@ const createWindow = () => {
         }
     });
 
-    //win.setMenuBarVisibility(false);
     win.loadFile('index.html');
+
+
 };
 
 // dispara a criação da janela
 app.whenReady().then(() => {
     createWindow();
+
+    ipcMain.handle('ocultar', () => {
+        win.setMenuBarVisibility(false);
+    });
+    ipcMain.handle('mostrar', () => {
+        win.setMenuBarVisibility(true);
+    });
+
+    ipcMain.handle('irParaSegundaTela', () => {
+
+        let displays = screen.getAllDisplays();
+        let externalDisplay = displays.find((display) => {
+            return display.bounds.x !== 0 || display.bounds.y !== 0
+        });
+
+        win.setPosition(externalDisplay.bounds.x + 50, externalDisplay.bounds.y + 50);
+
+    });
+
+    ipcMain.handle('sairDaSegundaTela', () => {
+
+        win.setPosition(100, 200);
+
+    });
+
 });
 
 //código para fechamento da janela no Windows
