@@ -59,9 +59,9 @@ h2 {
     font-size: 15vh;
     text-align: center;
     font-weight: bold;
-    letter-spacing: 1vh;
+    letter-spacing: 0.5vh;
     text-shadow: black 1vh 1vh 0.1vh;
-
+    font-family: 'Chivo Mono', monospace;
 }
 
 .piscar_dois_pontos {

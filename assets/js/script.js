@@ -86,7 +86,7 @@ function fullscreen() {
     }
 }
 
-async function visibilidadeBotoesFullScree() {
+async function visibBotoesFullScreen() {
     if (document.fullscreenElement) {
         controles.botaoEntrarFullscreen.classList.add("ocultar");
         controles.botaoSairFullscreen.classList.remove("ocultar");
@@ -98,7 +98,7 @@ async function visibilidadeBotoesFullScree() {
 
 async function iniciarHoraTermino() {
 
-    visibilidadeBotoesFullScree();
+    visibBotoesFullScreen();
 
     if (campos.campoHoraTermino.value) {
         let horaTermino = campos.campoHoraTermino.value.split(":");
@@ -108,7 +108,7 @@ async function iniciarHoraTermino() {
 
 async function iniciarDuracao() {
 
-    visibilidadeBotoesFullScree();
+    visibBotoesFullScreen();
 
     if ((campos.campoTempoLimiteHora.value > 0 || campos.campoTempoLimiteMinuto.value > 0) &&
         (campos.campoTempoLimiteHora.value || campos.campoTempoLimiteMinuto.value)) {
@@ -132,6 +132,10 @@ async function iniciarDuracao() {
 }
 
 async function relogio(horaTermino) {
+
+    let y = horaTermino[1];
+    if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
+    informacoes.horario[1].innerText = `Termina às ${horaTermino[0]}:${y}`;
 
     controles.horaLimite.classList.remove("organizar");
     controles.horaLimite.classList.add("ocultar");
@@ -235,12 +239,8 @@ function imprimirRelogio(horaAtual, horaTermino) {
 
         piscarDoisPontos();
     }
-    
-    let y = horaTermino[1];
-    if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
 
-    informacoes.horario[0].innerText = `Hora atual = ${horas}:${minutos}:${segundos}`;
-    informacoes.horario[1].innerText = `Termina = ${horaTermino[0]}:${y}`;
+    informacoes.horario[0].innerText = `${horas}:${minutos}:${segundos}`;
 }
 
 async function girarPonteiros(tempoRestante) {
