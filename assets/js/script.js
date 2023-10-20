@@ -304,7 +304,7 @@ function imprimirRelogio(horaAtual, horaTermino) {
         piscarDoisPontos();
     }
 
-    informacoes.horario[0].innerText = `${horas}:${minutos}:${segundos}`;
+    informacoes.horario[0].innerText = `Agora = ${horas}:${minutos}:${segundos}`;
 }
 
 async function girarPonteiros(tempoRestante) {
