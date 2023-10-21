@@ -14,12 +14,26 @@
 }
 
 @keyframes piscar {
-    0% {
+    from {
         color: rgba(255, 255, 255, 1);
     }
 
-    100% {
+    to {
         color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes aumentarBotao {
+    from {
+        fill: white;
+        height: 5vh;
+        width: 5vh;
+    }
+
+    to {
+        fill: yellow;
+        height: 15vh;
+        width: 15vh;
     }
 }
 
@@ -80,7 +94,7 @@ h2 {
 }
 
 .piscar_dois_pontos {
-    animation: piscar 500ms infinite;
+    animation: piscar 500ms;
 }
 
 .ocultar {
@@ -159,6 +173,7 @@ button:hover {
     font-family: 'Changa', sans-serif;
     padding-left: 2vh;
     padding-right: 2vh;
+    cursor: pointer;
 }
 
 #zerar button {
@@ -170,11 +185,10 @@ button:hover {
     font-family: 'Changa', sans-serif;
     padding-left: 2vh;
     padding-right: 2vh;
-    opacity: 0.2;
 }
 
 #zerar button:hover {
-    background-color: black;
+    background-color: rgba(255, 255, 0, 0.2);
     border: 0.2vh solid rgb(255, 255, 0);
     border-radius: 1vh;
     color: rgb(255, 255, 255);
@@ -182,7 +196,7 @@ button:hover {
     font-family: 'Changa', sans-serif;
     padding-left: 2vh;
     padding-right: 2vh;
-    opacity: 1;
+    cursor: pointer;
 }
 
 #on-off-2-tela {
@@ -221,6 +235,7 @@ button:hover {
 #checker-2-tela:checked:hover {
     background-color: rgb(14, 126, 201);
     border: 0.5vh solid rgb(14, 126, 201);
+    cursor: pointer;
 }
 
 #on-off-2-tela span {
@@ -250,16 +265,26 @@ fieldset {
     border-width: 1px;
 }
 
-label {
+legend {
     font-size: 3vh;
     font-weight: bold;
+    padding: 0 2vh;
 }
 
 #entrar-fullscreen:hover,
 #sair-fullscreen:hover {
+    animation: aumentarBotao 200ms;
     fill: yellow;
     height: 15vh;
     width: 15vh;
+    cursor: pointer;
+}
+
+#entrar-fullscreen,
+#sair-fullscreen {
+    fill: white;
+    height: 7vh;
+    width: 7vh;
 }
 
 #fullscreen {
@@ -268,14 +293,6 @@ label {
     align-items: center;
     justify-content: center;
     margin: auto;
-}
-
-#entrar-fullscreen,
-#sair-fullscreen {
-    fill: white;
-    margin: 2vh;
-    height: 5vh;
-    width: 5vh;
 }
 
 #texto-tempo {

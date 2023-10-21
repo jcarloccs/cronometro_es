@@ -4,7 +4,7 @@ const audioEncerramento = new Audio("./assets/audios/Beeper_Emergency_Call.mp3")
 
 const textoTempo = document.getElementById("texto-tempo");
 
-let mostrarChecker = false;
+let mostrarControlesFullscreen = false;
 
 const informacoes = {
     horasRest: document.getElementById("horas"),
@@ -65,10 +65,20 @@ const funcoesEletronJS = {
 
 let tempoRestante;
 
+// para a execução do código pra não mostrar tempo negativo
 let continuar = true;
 
-let elem = document.documentElement;
-
+//enter nos inputs inicia o cronômetro
+campos.campoHoraTermino.addEventListener("keyup", (x) => {
+    if (x.key === "Enter") iniciarHoraTermino();
+});
+campos.campoTempoLimiteHora.addEventListener("keyup", (x) => {
+    if (x.key === "Enter") iniciarDuracao();
+});
+campos.campoTempoLimiteMinuto.addEventListener("keyup", (x) => {
+    if (x.key === "Enter") iniciarDuracao();
+});
+// fullscreens
 document.addEventListener("keydown", (x) => {
     if (x.key === "f") {
         fullscreen();
@@ -77,7 +87,6 @@ document.addEventListener("keydown", (x) => {
         sairFullscreen();
     }
 });
-
 controles.zerar.addEventListener("click", () => {
     sairFullscreen();
     location.reload();
@@ -85,14 +94,19 @@ controles.zerar.addEventListener("click", () => {
 
 function entrarFullscreen() {
 
+    // altera visibilidade dos controles em tela cheia
     controles.botaoEntrarFullscreen.classList.add("ocultar");
     controles.botaoSairFullscreen.classList.remove("ocultar");
-
     controles.onOff2Tela.style.removeProperty("display");
     controles.onOff2Tela.classList.add("ocultar");
-    
-    funcoesEletronJS.paraSegundaTela();
+    controles.zerar.style.removeProperty("display");
+    controles.zerar.classList.add("ocultar");
 
+    funcoesEletronJS.paraSegundaTela();
+    funcoesEletronJS.ocultarMenu();
+
+    // coloca em tela cheia
+    let elem = document.documentElement;
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) { /* Safari */
@@ -101,19 +115,21 @@ function entrarFullscreen() {
         elem.msRequestFullscreen();
     }
 
-    funcoesEletronJS.ocultarMenu();
 }
 
 function sairFullscreen() {
 
+    // altera a visibilidade dos controles quando sai da tela cheia
     controles.botaoEntrarFullscreen.classList.remove("ocultar");
     controles.botaoSairFullscreen.classList.add("ocultar");
-    
-    if (mostrarChecker) {
+    if (mostrarControlesFullscreen) {
         controles.onOff2Tela.style.display = "flex";
         controles.onOff2Tela.classList.remove("ocultar");
+        controles.zerar.style.display = "flex";
+        controles.zerar.classList.remove("ocultar");
     }
 
+    // sai da tela cheia
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) { /* Safari */
@@ -123,7 +139,6 @@ function sairFullscreen() {
     }
 
     funcoesEletronJS.sairSegundaTela();
-
     funcoesEletronJS.mostrarMenu();
 }
 
@@ -137,6 +152,7 @@ function fullscreen() {
 
 }
 
+// alterna a visibilidades dos botões de fullscreen
 async function visibBotoesFullScreen() {
 
     if (document.exitFullscreen) {
@@ -186,9 +202,10 @@ async function iniciarDuracao() {
 
 async function relogio(horaTermino) {
 
+    // adiciona click duplo para colocar em tela cheia
     document.querySelector("body").addEventListener("dblclick", fullscreen);
 
-    mostrarChecker = true;
+    mostrarControlesFullscreen = true;
 
     let y = horaTermino[1];
     if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
@@ -203,11 +220,11 @@ async function relogio(horaTermino) {
     controles.fieldsets.forEach((x) => x.classList.add("ocultar"));
     controles.fullscreen.style.display = "flex";
     controles.fullscreen.classList.remove("ocultar");
-    controles.zerar.style.display = "flex";
-    controles.zerar.classList.remove("ocultar");
     if (!document.fullscreenElement) {
         controles.onOff2Tela.style.display = "flex";
         controles.onOff2Tela.classList.remove("ocultar");
+        controles.zerar.style.display = "flex";
+        controles.zerar.classList.remove("ocultar");
     }
     controles.controles.style.height = "auto";
     informacoes.horario.forEach((x) => x.classList.remove("ocultar"));
@@ -304,7 +321,7 @@ function imprimirRelogio(horaAtual, horaTermino) {
         piscarDoisPontos();
     }
 
-    informacoes.horario[0].innerText = `Agora = ${horas}:${minutos}:${segundos}`;
+    informacoes.horario[0].innerText = `Hora certa = ${horas}:${minutos}:${segundos}`;
 }
 
 async function girarPonteiros(tempoRestante) {
