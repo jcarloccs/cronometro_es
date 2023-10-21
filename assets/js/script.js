@@ -34,7 +34,6 @@ const controles = {
     duracao: document.getElementById("duracao"),
     fullscreen: document.getElementById("fullscreen"),
     controles: document.getElementById("controles"),
-    labels: document.querySelectorAll("label"),
     fieldsets: document.querySelectorAll("fieldset"),
     botaoEntrarFullscreen: document.getElementById("entrar-fullscreen"),
     botaoSairFullscreen: document.getElementById("sair-fullscreen"),
@@ -94,6 +93,16 @@ controles.zerar.addEventListener("click", () => {
 
 function entrarFullscreen() {
 
+    // coloca em tela cheia
+    let elem = document.documentElement;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+
     // altera visibilidade dos controles em tela cheia
     controles.botaoEntrarFullscreen.classList.add("ocultar");
     controles.botaoSairFullscreen.classList.remove("ocultar");
@@ -105,19 +114,18 @@ function entrarFullscreen() {
     funcoesEletronJS.paraSegundaTela();
     funcoesEletronJS.ocultarMenu();
 
-    // coloca em tela cheia
-    let elem = document.documentElement;
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-    }
-
 }
 
 function sairFullscreen() {
+
+    // sai da tela cheia
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
 
     // altera a visibilidade dos controles quando sai da tela cheia
     controles.botaoEntrarFullscreen.classList.remove("ocultar");
@@ -127,15 +135,6 @@ function sairFullscreen() {
         controles.onOff2Tela.classList.remove("ocultar");
         controles.zerar.style.display = "flex";
         controles.zerar.classList.remove("ocultar");
-    }
-
-    // sai da tela cheia
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) { /* Safari */
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE11 */
-        document.msExitFullscreen();
     }
 
     funcoesEletronJS.sairSegundaTela();
@@ -155,10 +154,9 @@ function fullscreen() {
 // alterna a visibilidades dos botões de fullscreen
 async function visibBotoesFullScreen() {
 
-    if (document.exitFullscreen) {
+    if (!document.fullscreenElement) {
         controles.botaoEntrarFullscreen.classList.remove("ocultar");
         controles.botaoSairFullscreen.classList.add("ocultar");
-
     } else {
         controles.botaoEntrarFullscreen.classList.add("ocultar");
         controles.botaoSairFullscreen.classList.remove("ocultar");
@@ -216,7 +214,6 @@ async function relogio(horaTermino) {
     controles.horaLimite.classList.add("ocultar");
     controles.duracao.classList.remove("organizar");
     controles.duracao.classList.add("ocultar");
-    controles.labels.forEach((x) => x.classList.add("ocultar"));
     controles.fieldsets.forEach((x) => x.classList.add("ocultar"));
     controles.fullscreen.style.display = "flex";
     controles.fullscreen.classList.remove("ocultar");
@@ -243,6 +240,13 @@ async function relogio(horaTermino) {
             x.style.stopColor = "#ffff00";
         });
         desenhoRelogio.corCirculoInterno.style.fill = "#ffff00";
+    }
+
+    if (calculoTempoRestante(tempoRestanteInicial, horaTermino) <= 0) {
+        desenhoRelogio.corCirculoExterno.forEach((x) => {
+            x.style.stopColor = "#ff0000";
+        });
+        desenhoRelogio.corCirculoInterno.style.fill = "#ff0000";
     }
 
     while (true) {
