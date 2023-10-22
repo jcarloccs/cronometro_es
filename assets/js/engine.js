@@ -211,7 +211,10 @@ novamente e zera o cronômetro.
 
 - Apertar "F11" para colocar em tela cheia terá só poderá
 usar "F11" de novo para sair da tela cheia. As outras maneiras
-não funcionam nesse caso.`
+não funcionam nesse caso.
+
+- O cronômetro fecha automaticamente 1 minuto depois
+do tempo acabar.`
 
     );
 }
