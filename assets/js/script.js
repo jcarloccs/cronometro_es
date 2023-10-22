@@ -91,6 +91,9 @@ const funcoesEletronJS = {
 
 const funcoesFullscreen = {
     entrarFullscreen: function () {
+    
+        funcoesEletronJS.paraSegundaTela();
+        funcoesEletronJS.ocultarMenu();
 
         // coloca em tela cheia
         let elem = document.documentElement;
@@ -108,9 +111,6 @@ const funcoesFullscreen = {
         controles.onOff2Tela.classList.add("ocultar");
         controles.zerar.style.removeProperty("display");
         controles.zerar.classList.add("ocultar");
-
-        funcoesEletronJS.paraSegundaTela();
-        funcoesEletronJS.ocultarMenu();
 
     },
     sairFullscreen: function () {
