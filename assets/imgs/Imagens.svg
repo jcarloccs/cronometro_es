@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="0.32063344"
-     inkscape:cx="547.35401"
-     inkscape:cy="332.155"
+     inkscape:zoom="1.8137766"
+     inkscape:cx="492.61854"
+     inkscape:cy="42.728525"
      inkscape:window-width="1366"
      inkscape:window-height="705"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer3" />
+     inkscape:current-layer="layer5" />
   <defs
      id="defs1">
     <linearGradient
@@ -146,7 +146,7 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="circulo-central"
+     inkscape:label="segundos"
      style="display:inline">
     <circle
        style="display:inline;fill:#0000ff;fill-opacity:0.1;stroke:none;stroke-width:11.9481;stroke-dasharray:none"
@@ -155,6 +155,20 @@
        cy="132.29166"
        r="121.70832"
        inkscape:label="path18-1" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.269576;stroke-dasharray:none;stroke-opacity:1"
+       id="rect28"
+       width="2.6458282"
+       height="9.5502663"
+       x="130.96873"
+       y="13.210144"
+       inkscape:label="rect28"
+       ry="1.3229165" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="minutos">
     <path
        style="display:inline;fill:url(#linearGradient25);fill-opacity:1;stroke:none;stroke-width:11.9481;stroke-dasharray:none"
        id="path18"
@@ -168,15 +182,18 @@
        sodipodi:end="5.2359878"
        sodipodi:arc-type="slice"
        d="m 132.29166,10.583336 a 121.70832,121.70832 0 0 1 60.85416,16.305826 L 132.29166,132.29166 Z" />
-    <rect
-       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.269576;stroke-dasharray:none;stroke-opacity:1"
-       id="rect28"
-       width="2.6458282"
-       height="9.5502663"
-       x="130.96873"
-       y="13.210144"
-       inkscape:label="rect28"
-       ry="1.3229165" />
+    <path
+       id="rect1"
+       style="display:inline;fill:#ffffff;stroke-width:4.95264"
+       d="m 126.71196,0 h 11.15938 l -5.57969,9.2604189 z"
+       sodipodi:nodetypes="cccc" />
+    <circle
+       style="display:inline;fill:#0000ff;fill-opacity:0.1;stroke:none;stroke-width:11.9481;stroke-dasharray:none"
+       id="path18-1-1"
+       cx="132.29166"
+       cy="132.29166"
+       r="121.70832"
+       inkscape:label="path18-1" />
   </g>
   <g
      inkscape:groupmode="layer"
