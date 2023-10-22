@@ -8,35 +8,6 @@
     src: url(../fonts/Changa/Changa-VariableFont_wght.ttf);
 }
 
-@font-face {
-    font-family: 'Chakra Petch';
-    src: url(../fonts/Chakra_Petch/ChakraPetch-Regular.ttf);
-}
-
-@keyframes piscar {
-    from {
-        color: rgba(255, 255, 255, 1);
-    }
-
-    to {
-        color: rgba(255, 255, 255, 0);
-    }
-}
-
-@keyframes aumentarBotao {
-    from {
-        fill: white;
-        height: 5vh;
-        width: 5vh;
-    }
-
-    to {
-        fill: yellow;
-        height: 15vh;
-        width: 15vh;
-    }
-}
-
 body {
     height: 100vh;
     display: flex;
@@ -85,7 +56,7 @@ h2 {
 }
 
 .tempo_restante {
-    font-size: 15vh;
+    font-size: 14vh;
     text-align: center;
     font-weight: bold;
     letter-spacing: 0.5vh;
@@ -94,7 +65,8 @@ h2 {
 }
 
 .piscar_dois_pontos {
-    animation: piscar 500ms;
+    color: rgba(255, 255, 255, 0);
+    transition: color 500ms;
 }
 
 .ocultar {
@@ -273,7 +245,6 @@ legend {
 
 #entrar-fullscreen:hover,
 #sair-fullscreen:hover {
-    animation: aumentarBotao 200ms;
     fill: yellow;
     height: 15vh;
     width: 15vh;
@@ -285,6 +256,7 @@ legend {
     fill: white;
     height: 7vh;
     width: 7vh;
+    transition: width 200ms;
 }
 
 #fullscreen {
