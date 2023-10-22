@@ -62,13 +62,31 @@ document.addEventListener("keydown", (x) => {
     if (x.key === "f") {
         funcoesFullscreen.fullscreen();
     }
-    else if (x.key === "Escape") {
-        alternarBotoesFullScreen.visibBotoesFullScreen();
+});
+document.addEventListener("fullscreenchange", () => {
+    if (document.fullscreenElement) {
+        alternarBotoesFullScreen.mostrarBtnSairFullscreen();
+        // altera visibilidade dos controles em tela cheia
+        controles.onOff2Tela.style.removeProperty("display");
+        controles.onOff2Tela.classList.add("ocultar");
+        controles.zerar.style.removeProperty("display");
+        controles.zerar.classList.add("ocultar");
+    }
+    else if (!document.fullscreenElement) {
+        alternarBotoesFullScreen.mostrarBtnIrFullscreen();
+        // altera a visibilidade dos controles quando sai da tela cheia
+        if (mostrarControlesFullscreen) {
+            controles.onOff2Tela.style.display = "flex";
+            controles.onOff2Tela.classList.remove("ocultar");
+            controles.zerar.style.display = "flex";
+            controles.zerar.classList.remove("ocultar");
+        }
+        funcoesEletronJS.sairSegundaTela();
     }
 });
 controles.zerar.addEventListener("click", () => {
     location.reload();
-})
+});
 
 const funcoesEletronJS = {
     mostrarMenu: () => {
@@ -91,7 +109,7 @@ const funcoesEletronJS = {
 
 const funcoesFullscreen = {
     entrarFullscreen: function () {
-    
+
         funcoesEletronJS.paraSegundaTela();
         funcoesEletronJS.ocultarMenu();
 
@@ -105,13 +123,6 @@ const funcoesFullscreen = {
             elem.msRequestFullscreen();
         }
 
-        // altera visibilidade dos controles em tela cheia
-        alternarBotoesFullScreen.mostrarBtnSairFullscreen();
-        controles.onOff2Tela.style.removeProperty("display");
-        controles.onOff2Tela.classList.add("ocultar");
-        controles.zerar.style.removeProperty("display");
-        controles.zerar.classList.add("ocultar");
-
     },
     sairFullscreen: function () {
 
@@ -124,16 +135,6 @@ const funcoesFullscreen = {
             document.msExitFullscreen();
         }
 
-        // altera a visibilidade dos controles quando sai da tela cheia
-        alternarBotoesFullScreen.mostrarBtnIrFullscreen();
-        if (mostrarControlesFullscreen) {
-            controles.onOff2Tela.style.display = "flex";
-            controles.onOff2Tela.classList.remove("ocultar");
-            controles.zerar.style.display = "flex";
-            controles.zerar.classList.remove("ocultar");
-        }
-
-        funcoesEletronJS.sairSegundaTela();
         funcoesEletronJS.mostrarMenu();
     },
     fullscreen: function () {
