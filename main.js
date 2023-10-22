@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen } = require('electron')
+const { app, BrowserWindow, ipcMain, screen} = require('electron')
 const path = require('node:path')
 
 let win;
@@ -19,35 +19,36 @@ const createWindow = () => {
 // dispara a criação da janela
 app.whenReady().then(() => {
     createWindow();
-
-    ipcMain.handle('ocultar', () => {
-        win.setMenuBarVisibility(false);
-    });
-    ipcMain.handle('mostrar', () => {
-        win.setMenuBarVisibility(true);
-    });
-
-    ipcMain.handle('irParaSegundaTela', () => {
-
-        win.restore();
-        let displays = screen.getAllDisplays();
-        let externalDisplay = displays.find((display) => {
-            return display.bounds.x !== 0 || display.bounds.y !== 0
-        });
-        if(externalDisplay) {
-            win.setPosition(externalDisplay.bounds.x + 50, externalDisplay.bounds.y + 50);
-        }
-        
-    });
-
-    ipcMain.handle('sairDaSegundaTela', () => {
-        win.restore();
-        win.setPosition(50, 50);
-    });
-
 });
 
 //código para fechamento da janela no Windows
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });
+
+// mostrar ou ocultar barra de menu
+ipcMain.handle('ocultar', () => {
+    win.setMenuBarVisibility(false);
+});
+ipcMain.handle('mostrar', () => {
+    win.setMenuBarVisibility(true);
+});
+
+// ir ou voltar da tela extendida
+ipcMain.handle('irParaSegundaTela', () => {
+    win.restore();
+    let displays = screen.getAllDisplays();
+    let externalDisplay = displays.find((display) => {
+        return display.bounds.x !== 0 || display.bounds.y !== 0
+    });
+    if (externalDisplay) {
+        win.setPosition(externalDisplay.bounds.x + 50, externalDisplay.bounds.y + 50);
+    }
+});
+ipcMain.handle('sairDaSegundaTela', () => {
+    win.restore();
+    win.setPosition(50, 50);
+});
+
+// comando para fechar a janela automaticamente
+ipcMain.handle('autoClose', () => app.quit());

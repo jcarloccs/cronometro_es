@@ -97,6 +97,16 @@ h2 {
     justify-content: space-between;
 }
 
+#ajuda {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 1vh;
+    bottom: 1vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .horarios {
     letter-spacing: 0.5vh;
     word-spacing: 1vh;
@@ -257,7 +267,8 @@ legend {
 }
 
 #entrar-fullscreen:hover,
-#sair-fullscreen:hover {
+#sair-fullscreen:hover,
+#botao-ajuda:hover {
     fill: yellow;
     height: 15vh;
     width: 15vh;
@@ -265,14 +276,16 @@ legend {
 }
 
 #entrar-fullscreen,
-#sair-fullscreen {
+#sair-fullscreen,
+#botao-ajuda {
     fill: white;
     height: 7vh;
     width: 7vh;
     transition: width 200ms;
 }
 
-#fullscreen {
+#fullscreen,
+#ajuda {
     height: 15vh;
     width: 15vh;
     align-items: center;

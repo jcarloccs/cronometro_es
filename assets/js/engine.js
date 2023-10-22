@@ -43,7 +43,8 @@ const controles = {
     zerar: document.getElementById("zerar"),
     onOff2Tela: document.getElementById("on-off-2-tela"),
     checker2Tela: document.getElementById("checker-2-tela"),
-    text2Tela: document.getElementById("checker-2-tela")
+    text2Tela: document.getElementById("checker-2-tela"),
+    ajuda: document.querySelector("#ajuda svg")
 }
 
 let tempoRestante;
@@ -76,6 +77,7 @@ document.addEventListener("fullscreenchange", () => {
         controles.onOff2Tela.classList.add("ocultar");
         controles.zerar.style.removeProperty("display");
         controles.zerar.classList.add("ocultar");
+        controles.ajuda.classList.add("ocultar");
     }
     else if (!document.fullscreenElement) {
         alternarBotoesFullScreen.mostrarBtnIrFullscreen();
@@ -86,6 +88,7 @@ document.addEventListener("fullscreenchange", () => {
             controles.zerar.style.display = "flex";
             controles.zerar.classList.remove("ocultar");
         }
+        controles.ajuda.classList.remove("ocultar");
         funcoesEletronJS.sairSegundaTela();
     }
 });
@@ -95,10 +98,14 @@ controles.zerar.addEventListener("click", () => {
 
 const funcoesEletronJS = {
     mostrarMenu: () => {
-        if (document.fullscreenElement && window.funcoesWinElectron) window.funcoesWinElectron.mostrarMenu();
+        if (document.fullscreenElement && window.funcoesWinElectron) {
+            window.funcoesWinElectron.mostrarMenu();
+        }
     },
     ocultarMenu: () => {
-        if (!document.fullscreenElement && window.funcoesWinElectron) window.funcoesWinElectron.ocultarMenu();
+        if (!document.fullscreenElement && window.funcoesWinElectron) {
+            window.funcoesWinElectron.ocultarMenu();
+        }
     },
     paraSegundaTela: () => {
         if (window.funcoesWinElectron && controles.checker2Tela.checked) {
@@ -175,6 +182,38 @@ const alternarBotoesFullScreen = {
 function mostrarCronometro() {
     cronometro.relogio.style.opacity = 1;
     cronometro.desenhos.style.opacity = 1;
+}
+
+async function ajuda() {
+    alert(
+
+`- Digite o horário que a lição terminará ou
+digite quanto tempo a lição vai levar para terminar.
+
+- Você também pode clicar ícone de relógio para abrir
+um menu e selecionar o horário.
+- Use a rodinha do mouse para mudar os números.
+
+- Você pode apertar "Enter" depois de digitar
+para iniciar o cronômetro ou clicar nos botões "Iniciar".
+
+- Tecla "F" : alterna entre tela cheia e normal.
+- Clicar 2 vezes em qualquer lugar dentro da janela
+depois de iniciar o cronômetro alterna entre tela cheia e normal.
+
+- Desmarque a caixinha "2ª Tela" se não
+quiser que a tela cheia vá para a outra tela.
+
+- Tecla "Esc" : sai da tela cheia.
+
+- Clicar no botão "Zerar" mostra os controles
+novamente e zera o cronômetro.
+
+- Apertar "F11" para colocar em tela cheia terá só poderá
+usar "F11" de novo para sair da tela cheia. As outras maneiras
+não funcionam nesse caso.`
+
+    );
 }
 
 async function iniciarHoraTermino() {
@@ -379,6 +418,7 @@ const animacoes = {
         }
 
         if (tempoRestante <= 0 && tempoRestante >= -2) {
+            audioEncerramento.volume = 0.5;
             audioEncerramento.play();
             desenhoRelogio.corCirculoExterno.forEach((x) => {
                 x.style.transition = "5s";
@@ -388,6 +428,13 @@ const animacoes = {
             desenhoRelogio.corCirculoInterno.style.transition = "5s";
             informacoes.textoLicao.innerText = "LIÇÃO DA ESCOLA SABATINA ENCERRADA";
             continuar = false;
+
+            //fecha o programa após um tempo
+            if (window.funcoesWinElectron) {
+                setTimeout(() => {
+                    window.funcoesWinElectron.autoClose();
+                }, 60000);
+            }
         }
     }
 }

@@ -186,50 +186,59 @@
         </div>
     </div>
 
-    <div id="controles">
+    <div id="controls-e-ajuda">
+        <div id="controles">
+            <fieldset>
+                <legend>Hora para terminar</legend>
+                <div id="hora-alvo" class="controles organizar">
+                    <input type="time" class="controles" name="" id="hora-termino" />
+                    <button id="botao_terminio" class="controles" onclick="iniciarHoraTermino();">Iniciar</button>
+                </div>
+            </fieldset>
 
-        <fieldset>
-            <legend>Hora para terminar</legend>
-            <div id="hora-alvo" class="controles organizar">
-                <input type="time" class="controles" name="" id="hora-termino" />
-                <button id="botao_terminio" class="controles" onclick="iniciarHoraTermino();">Iniciar</button>
+            <fieldset>
+                <legend>Duração</legend>
+                <div id="duracao" class="controles organizar">
+                    <input class="controles" type="number" name="" id="hora" min="0" max="23">
+                    <span>h</span>
+                    <input class="controles" type="number" name="" id="minuto" min="0" max="59">
+                    <span>m</span>
+                    <button id="botao_tempo" class="controles" onclick="iniciarDuracao();">Iniciar</button>
+                </div>
+            </fieldset>
+
+            <div class="controles ocultar" id="zerar">
+                <button id="botao-zerar" class="controles">Zerar</button>
             </div>
-        </fieldset>
 
-        <fieldset>
-            <legend>Duração</legend>
-            <div id="duracao" class="controles organizar">
-                <input class="controles" type="number" name="" id="hora" min="0" max="23">
-                <span>h</span>
-                <input class="controles" type="number" name="" id="minuto" min="0" max="59">
-                <span>m</span>
-                <button id="botao_tempo" class="controles" onclick="iniciarDuracao();">Iniciar</button>
+            <div class="controles ocultar" id="on-off-2-tela">
+                <input type="checkbox" class="controles" name="" checked id="checker-2-tela">
+                <span id="text-2-tela">2º TELA</span>
             </div>
-        </fieldset>
 
-        <div class="controles ocultar" id="zerar">
-            <button id="botao-zerar" class="controles">Zerar</button>
+            <div class="controles ocultar" id="fullscreen">
+
+                <svg id="entrar-fullscreen" onclick="funcoesFullscreen.entrarFullscreen();"
+                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                    <path
+                        d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" />
+                </svg>
+
+                <svg id="sair-fullscreen" onclick="funcoesFullscreen.sairFullscreen();"
+                    xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                    <path
+                        d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z" />
+                </svg>
+
+            </div>
         </div>
-
-        <div class="controles ocultar" id="on-off-2-tela">
-            <input type="checkbox" class="controles" name="" checked id="checker-2-tela">
-            <span id="text-2-tela">2º TELA</span>
-        </div>
-
-        <div class="controles ocultar" id="fullscreen">
-
-            <svg id="entrar-fullscreen" onclick="funcoesFullscreen.entrarFullscreen();"
-                xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                <path
-                    d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" />
-            </svg>
-
-            <svg id="sair-fullscreen" onclick="funcoesFullscreen.sairFullscreen();" xmlns="http://www.w3.org/2000/svg"
-                height="24" viewBox="0 -960 960 960" width="24">
-                <path
-                    d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z" />
-            </svg>
-
+        <div id="ajuda" class="controles" onclick="ajuda();">
+            
+                <svg id="botao-ajuda" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                    <path
+                        d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+                </svg>
+            
         </div>
 
     </div>
