@@ -13,6 +13,11 @@ const informacoes = {
     textoLicao: document.getElementById("texto-licao")
 }
 
+const cronometro = {
+    desenhos: document.getElementById("desenhos"),
+    relogio: document.getElementById("relogio")
+}
+
 const desenhoRelogio = {
     ponteiroMinutos: document.getElementById("ponteiro-minutos"),
     ponteiroSegundos: document.getElementById("ponteiro-segundos"),
@@ -167,7 +172,14 @@ const alternarBotoesFullScreen = {
     }
 }
 
+function mostrarCronometro() {
+    cronometro.relogio.style.opacity = 1;
+    cronometro.desenhos.style.opacity = 1;
+}
+
 async function iniciarHoraTermino() {
+
+    mostrarCronometro();
 
     alternarBotoesFullScreen.visibBotoesFullScreen();
 
@@ -179,6 +191,8 @@ async function iniciarHoraTermino() {
 }
 
 async function iniciarDuracao() {
+
+    mostrarCronometro();
 
     alternarBotoesFullScreen.visibBotoesFullScreen();
 
