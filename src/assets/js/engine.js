@@ -64,18 +64,18 @@ campos.campoTempoLimiteMinuto.addEventListener("keyup", (x) => {
     if (x.key === "Enter") iniciarDuracao();
 });
 // atalhos de teclado
-document.addEventListener("keydown", (x) => {
+document.addEventListener("keydown", async (x) => {
     if (x.key === "f") {
         funcoesFullscreen.fullscreen();
     } else if (x.key === "m" && x.altKey) {
-        if (window.funcoesWinElectron) {
-            window.funcoesWinElectron.isMenuBarVisible().then((a) => {
-                if (a) window.funcoesWinElectron.ocultarMenu();
-                else if (!a) window.funcoesWinElectron.mostrarMenu();
-            });
+        if (window.funcoesWinElectron && await window.funcoesWinElectron.isMenuBarVisible()) {
+            window.funcoesWinElectron.ocultarMenu();
+        } else if (window.funcoesWinElectron && !(await window.funcoesWinElectron.isMenuBarVisible())) {
+            window.funcoesWinElectron.mostrarMenu();
         }
     }
 });
+
 // fullscreens
 document.addEventListener("fullscreenchange", () => {
     if (document.fullscreenElement) {
