@@ -63,12 +63,18 @@ campos.campoTempoLimiteHora.addEventListener("keyup", (x) => {
 campos.campoTempoLimiteMinuto.addEventListener("keyup", (x) => {
     if (x.key === "Enter") iniciarDuracao();
 });
-// fullscreens
+// atalhos de teclado
 document.addEventListener("keydown", (x) => {
     if (x.key === "f") {
         funcoesFullscreen.fullscreen();
+    } else if (x.key === "m" && x.altKey) {
+        let t = window.funcoesWinElectron.isMenuBarVisible().then((a) => {
+            if (a) window.funcoesWinElectron.ocultarMenu();
+            else if (!a) window.funcoesWinElectron.mostrarMenu();
+        });
     }
 });
+// fullscreens
 document.addEventListener("fullscreenchange", () => {
     if (document.fullscreenElement) {
         alternarBotoesFullScreen.mostrarBtnSairFullscreen();
@@ -123,7 +129,6 @@ const funcoesFullscreen = {
     entrarFullscreen: function () {
 
         funcoesEletronJS.paraSegundaTela();
-        funcoesEletronJS.ocultarMenu();
 
         // coloca em tela cheia
         let elem = document.documentElement;
@@ -146,8 +151,6 @@ const funcoesFullscreen = {
         } else if (document.msExitFullscreen) { /* IE11 */
             document.msExitFullscreen();
         }
-
-        funcoesEletronJS.mostrarMenu();
     },
     fullscreen: function () {
 
@@ -187,7 +190,7 @@ function mostrarCronometro() {
 async function ajuda() {
     alert(
 
-`- Digite o horário que a lição terminará ou
+        `- Digite o horário que a lição terminará ou
 digite quanto tempo a lição vai levar para terminar.
 
 - Você também pode clicar ícone de relógio para abrir
@@ -197,7 +200,8 @@ um menu e selecionar o horário.
 - Você pode apertar "Enter" depois de digitar
 para iniciar o cronômetro ou clicar nos botões "Iniciar".
 
-- Tecla "F" : alterna entre tela cheia e normal.
+- Além do botão no canto inferior esquerdo, a tecla "F"
+alterna entre tela cheia e normal.
 - Clicar 2 vezes em qualquer lugar dentro da janela
 depois de iniciar o cronômetro alterna entre tela cheia e normal.
 
