@@ -1,12 +1,16 @@
 module.exports = {
   packagerConfig: {
     asar: true,
+    icon: './src/assets/imgs/favicon.ico',
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        authors: 'Jean Carlo',
+        description: 'Cronômetro para lição da escola sabatina',
+      },
     },
     {
       name: '@electron-forge/maker-zip',
