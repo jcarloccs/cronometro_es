@@ -190,9 +190,13 @@ function mostrarCronometro() {
 }
 
 async function ajuda() {
-    alert(
 
-        `- Digite o horário que a lição terminará ou
+    if (window.funcoesWinElectron) {
+        window.funcoesWinElectron.abrirAjuda();
+    } else {
+        alert(
+
+            `- Digite o horário que a lição terminará ou
 digite quanto tempo a lição vai levar para terminar.
 
 - Você também pode clicar ícone de relógio para abrir
@@ -222,7 +226,8 @@ não funcionam nesse caso.
 - O cronômetro fecha automaticamente 1 minuto depois
 do tempo acabar.`
 
-    );
+        );
+    }
 }
 
 async function iniciarHoraTermino() {

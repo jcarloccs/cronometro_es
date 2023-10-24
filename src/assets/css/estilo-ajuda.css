@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    color: rgb(223, 223, 223);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(53, 53, 53);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div {
+    width: 500px;
+}
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 10px;
+}
+
+li {
+    margin: 10px;
+    text-align: justify;
+    font-size: small;
+    list-style-type: circle;
+}
+
+ul {
+    padding-inline-start: 15px;
+}

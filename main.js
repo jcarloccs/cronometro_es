@@ -2,12 +2,16 @@ const { app, BrowserWindow, ipcMain, screen, Menu, MenuItem } = require('electro
 const path = require('node:path')
 
 let win;
+let help;
 
 // criar janela
 const createWindow = () => {
+    const isSingleInstance = app.requestSingleInstanceLock();
+
     win = new BrowserWindow({
         width: 800,
         height: 600,
+        icon: './src/imgs/bolinhas.svg',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
@@ -16,7 +20,20 @@ const createWindow = () => {
     win.setMenuBarVisibility(false);
 
     win.loadFile('./src/index.html');
-};
+}
+
+const createWindowHelp = () => {
+        help = new BrowserWindow({
+            parent: win,
+            width: 500,
+            height: 450,
+            useContentSize: true
+        });
+        help.setMaximizable(false);
+        help.setMinimizable(false);
+        help.setMenuBarVisibility(false);
+        help.loadFile('./src/help.html');
+}
 
 // dispara a criação da janela
 app.whenReady().then(() => {
@@ -54,6 +71,9 @@ function comunicMainRenderer() {
     ipcMain.on('sairDaSegundaTela', () => {
         win.restore();
         win.setPosition(50, 50);
+    });
+    ipcMain.on('abrir-ajuda', () => {
+        createWindowHelp();
     });
 
     // comando para fechar a janela automaticamente
