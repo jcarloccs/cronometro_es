@@ -11,7 +11,7 @@ const createWindow = () => {
     win = new BrowserWindow({
         width: 800,
         height: 600,
-        icon: './src/imgs/bolinhas.svg',
+        //icon: path.join(__dirname, 'src/assets/imgs/favicon.png'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
@@ -23,11 +23,13 @@ const createWindow = () => {
 }
 
 const createWindowHelp = () => {
+        if(help) help.destroy();
         help = new BrowserWindow({
             parent: win,
             width: 500,
             height: 450,
-            useContentSize: true
+            useContentSize: true,
+            //icon: path.join(__dirname, 'src/assets/imgs/favicon.png'),
         });
         help.setMaximizable(false);
         help.setMinimizable(false);

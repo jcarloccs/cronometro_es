@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1000"
+   height="1000"
+   viewBox="0 0 264.5833 264.5833"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="Ícone.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.32063343"
+     inkscape:cx="201.1643"
+     inkscape:cy="740.72126"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient1"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#000093;stop-opacity:1;"
+         offset="0"
+         id="stop1" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="1"
+         id="stop2" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1"
+       id="radialGradient2"
+       cx="132.29166"
+       cy="132.29166"
+       fx="132.29166"
+       fy="132.29166"
+       r="132.29166"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="minutos"
+     style="display:inline">
+    <circle
+       style="display:inline;fill:url(#radialGradient2);stroke:none;stroke-width:12.9871;stroke-dasharray:none"
+       id="path18-1-1"
+       cx="132.29166"
+       cy="132.29166"
+       inkscape:label="path18-1"
+       r="132.29166" />
+  </g>
+  <g
+     inkscape:label="circulo-externo"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="display:inline;fill:none;stroke:#ffffff;stroke-width:24.6157;stroke-dasharray:none;stroke-opacity:1"
+       id="path4"
+       cx="132.29166"
+       cy="132.29166"
+       r="119.98382"
+       inkscape:label="path4"
+       inkscape:export-filename="favicon.png"
+       inkscape:export-xdpi="25.336084"
+       inkscape:export-ydpi="25.336084" />
+    <path
+       style="display:inline;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:26.4583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 84.444906,99.233011 47.846754,33.058649 23.07406,76.63879"
+       id="path1"
+       sodipodi:nodetypes="ccc" />
+  </g>
+</svg>
