@@ -190,44 +190,9 @@ function mostrarCronometro() {
 }
 
 async function ajuda() {
-
     if (window.funcoesWinElectron) {
         window.funcoesWinElectron.abrirAjuda();
-    } else {
-        alert(
-
-            `- Digite o horário que a lição terminará ou
-digite quanto tempo a lição vai levar para terminar.
-
-- Você também pode clicar ícone de relógio para abrir
-um menu e selecionar o horário.
-- Use a rodinha do mouse para mudar os números.
-
-- Você pode apertar "Enter" depois de digitar
-para iniciar o cronômetro ou clicar nos botões "Iniciar".
-
-- Além do botão no canto inferior esquerdo, a tecla "F"
-alterna entre tela cheia e normal.
-- Clicar 2 vezes em qualquer lugar dentro da janela
-depois de iniciar o cronômetro alterna entre tela cheia e normal.
-
-- Desmarque a caixinha "2ª Tela" se não
-quiser que a tela cheia vá para a outra tela.
-
-- Tecla "Esc" : sai da tela cheia.
-
-- Clicar no botão "Zerar" mostra os controles
-novamente e zera o cronômetro.
-
-- Apertar "F11" para colocar em tela cheia terá só poderá
-usar "F11" de novo para sair da tela cheia. As outras maneiras
-não funcionam nesse caso.
-
-- O cronômetro fecha automaticamente 1 minuto depois
-do tempo acabar.`
-
-        );
-    }
+    } 
 }
 
 async function iniciarHoraTermino() {
@@ -457,6 +422,6 @@ const animacoes = {
             const notification = new window.Notification('Cronômetro ES', {
                 body: 'Próximo de 5 minutos'
             });
-        } 
+        }
     }
 }

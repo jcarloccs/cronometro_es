@@ -26,8 +26,8 @@ const createWindowHelp = () => {
     if (help) help.destroy();
     help = new BrowserWindow({
         parent: win,
-        width: 500,
-        height: 450,
+        width: 520,
+        height: 574,
         maximizable: false,
         minimizable: false,
         useContentSize: true,
