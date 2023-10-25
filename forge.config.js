@@ -9,7 +9,7 @@ module.exports = {
       name: '@electron-forge/maker-squirrel',
       config: {
         authors: 'Jean Carlo',
-        description: 'Cronômetro para lição da escola sabatina',
+        description: 'Cronômetro para lição da escola sabatina'
       },
     },
     {

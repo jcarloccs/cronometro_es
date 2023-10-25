@@ -28,11 +28,11 @@ const createWindowHelp = () => {
         parent: win,
         width: 500,
         height: 450,
+        maximizable: false,
+        minimizable: false,
         useContentSize: true,
         icon: path.join(__dirname, 'src/assets/imgs/favicon.ico'),
     });
-    help.setMaximizable(false);
-    help.setMinimizable(false);
     help.setMenuBarVisibility(false);
     help.loadFile('./src/help.html');
 }

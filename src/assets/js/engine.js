@@ -344,6 +344,7 @@ function imprimirRelogio(horaAtual, horaTermino) {
         animacoes.girarPonteiros(tempoRestante, segundosRestantes);
 
         animacoes.audioECores();
+        animacoes.notificacoes();
 
         if (horasRestantes == 0) {
             informacoes.horasRest.innerText = "";
@@ -450,5 +451,12 @@ const animacoes = {
                 }, 60000);
             }
         }
+    },
+    notificacoes: async () => {
+        if (tempoRestante === 360) {
+            const notification = new window.Notification('Cronômetro ES', {
+                body: 'Próximo de 5 minutos'
+            });
+        } 
     }
 }
