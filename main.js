@@ -84,6 +84,6 @@ function comunicMainRenderer() {
     ipcMain.on('progressBar', (event, t) => {
         if (t < 1800 && t > 0) {
             win.setProgressBar(1 - t / 1800);
-        } else win.setProgressBar(t);
+        } else win.setProgressBar(0);
     });
 }
