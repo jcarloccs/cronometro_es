@@ -101,6 +101,7 @@ document.addEventListener("fullscreenchange", () => {
     }
 });
 controles.zerar.addEventListener("click", () => {
+    window.funcoesWinElectron.progressBar(0);
     location.reload();
 });
 

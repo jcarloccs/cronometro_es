@@ -20,7 +20,6 @@ const createWindow = () => {
     win.setMenuBarVisibility(false);
 
     win.loadFile('./src/index.html');
-
 }
 
 const createWindowHelp = () => {
@@ -47,10 +46,6 @@ app.whenReady().then(() => {
 //código para fechamento da janela no Windows
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
-});
-
-app.on('before-quit', () => {
-    clearInterval(progressInterval)
 });
 
 function comunicMainRenderer() {
@@ -87,8 +82,8 @@ function comunicMainRenderer() {
     ipcMain.on('autoClose', () => app.quit());
 
     ipcMain.on('progressBar', (event, t) => {
-        if (t < 1800) {
+        if (t < 1800 && t > 0) {
             win.setProgressBar(1 - t / 1800);
-        } else win.setProgressBar(0);
+        } else win.setProgressBar(t);
     });
 }
