@@ -7,5 +7,6 @@ contextBridge.exposeInMainWorld('funcoesWinElectron', {
   sairDaSegundaTela: () => ipcRenderer.send('sairDaSegundaTela'),
   autoClose: () => ipcRenderer.send('autoClose'),
   isMenuBarVisible: () => ipcRenderer.invoke('isMenuBarVisible'),
-  abrirAjuda: () => ipcRenderer.send('abrir-ajuda')
+  abrirAjuda: () => ipcRenderer.send('abrir-ajuda'),
+  progressBar: (t) => ipcRenderer.send('progressBar', t)
 });

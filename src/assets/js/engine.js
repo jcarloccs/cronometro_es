@@ -306,6 +306,7 @@ function imprimirRelogio(horaAtual, horaTermino) {
         if (minutosRestantes < 10) minutosRestantes = `0${minutosRestantes.toString()}`;
         if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
 
+        window.funcoesWinElectron.progressBar(tempoRestante);
         animacoes.girarPonteiros(tempoRestante, segundosRestantes);
 
         animacoes.audioECores();
@@ -318,11 +319,10 @@ function imprimirRelogio(horaAtual, horaTermino) {
         else {
             informacoes.horasRest.innerText = `${horasRestantes}`;
         }
-
         informacoes.minutosRest.innerText = `${minutosRestantes}`;
         informacoes.segundosRest.innerText = `${segundosRestantes}`;
-
         animacoes.piscarDoisPontos();
+
     }
 
     informacoes.horario[0].innerText = `Hora certa = ${horas}:${minutos}:${segundos}`;
