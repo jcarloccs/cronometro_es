@@ -53,54 +53,6 @@ let mostrarControlesFullscreen = false;
 // para a execução do código pra não mostrar tempo negativo
 let continuar = true;
 
-//enter nos inputs inicia o cronômetro
-campos.campoHoraTermino.addEventListener("keyup", (x) => {
-    if (x.key === "Enter") iniciarHoraTermino();
-});
-campos.campoTempoLimiteHora.addEventListener("keyup", (x) => {
-    if (x.key === "Enter") iniciarDuracao();
-});
-campos.campoTempoLimiteMinuto.addEventListener("keyup", (x) => {
-    if (x.key === "Enter") iniciarDuracao();
-});
-// atalhos de teclado
-document.addEventListener("keydown", async (x) => {
-    if (x.key === "f") {
-        funcoesFullscreen.fullscreen();
-    } else if (x.key === "m" && x.altKey) {
-        electronJS.menu();
-    }
-});
-
-// fullscreens
-document.addEventListener("fullscreenchange", () => {
-    if (document.fullscreenElement) {
-        alternarBotoesFullScreen.mostrarBtnSairFullscreen();
-        // altera visibilidade dos controles em tela cheia
-        controles.onOff2Tela.style.removeProperty("display");
-        controles.onOff2Tela.classList.add("ocultar");
-        controles.zerar.style.removeProperty("display");
-        controles.zerar.classList.add("ocultar");
-        controles.ajuda.classList.add("ocultar");
-    }
-    else if (!document.fullscreenElement) {
-        alternarBotoesFullScreen.mostrarBtnIrFullscreen();
-        // altera a visibilidade dos controles quando sai da tela cheia
-        if (mostrarControlesFullscreen) {
-            controles.onOff2Tela.style.display = "flex";
-            controles.onOff2Tela.classList.remove("ocultar");
-            controles.zerar.style.display = "flex";
-            controles.zerar.classList.remove("ocultar");
-        }
-        controles.ajuda.classList.remove("ocultar");
-        electronJS.sairSegundaTela();
-    }
-});
-controles.zerar.addEventListener("click", () => {
-    electronJS.progressBar(0);
-    location.reload();
-});
-
 const electronJS = {
     menu: async () => {
         if (window.funcoesWinElectron && !(await window.funcoesWinElectron.isMenuBarVisible())) {
@@ -132,6 +84,17 @@ const electronJS = {
     autoClose: (tempo) => {
         if (window.funcoesWinElectron) {
             window.funcoesWinElectron.autoClose(tempo);
+            
+            const segundos = Math.trunc((tempo / 1000) % 60);
+            let corpo = `O cronômetro irá fechar em ${Math.trunc(tempo / 1000 / 60)} minuto(s)`;
+            if (segundos > 0) corpo = corpo.concat(` e ${segundos} segundo(s)`)
+
+            electronJS.notificacao('Cronômetro ES', corpo);
+        }
+    },
+    cancelAutoClose: () => {
+        if (window.funcoesWinElectron) {
+            window.funcoesWinElectron.cancelAutoClose();
         }
     },
     notificacao: (titulo, corpo) => {
@@ -195,6 +158,131 @@ const alternarBotoesFullScreen = {
         }
     }
 }
+
+const animacoes = {
+    ajustarCores: async function (horaAtual, horaTermino) {
+        if (calculoTempoRestante(horaAtual, horaTermino) <= 300) {
+            desenhoRelogio.corCirculoExterno.forEach((x) => {
+                x.style.stopColor = "#00ff00";
+            });
+            desenhoRelogio.corCirculoInterno.style.fill = "#00ff00";
+        }
+        if (calculoTempoRestante(horaAtual, horaTermino) <= 60) {
+            desenhoRelogio.corCirculoExterno.forEach((x) => {
+                x.style.stopColor = "#ffff00";
+            });
+            desenhoRelogio.corCirculoInterno.style.fill = "#ffff00";
+        }
+        if (calculoTempoRestante(horaAtual, horaTermino) <= 0) {
+            desenhoRelogio.corCirculoExterno.forEach((x) => {
+                x.style.stopColor = "#ff0000";
+            });
+            desenhoRelogio.corCirculoInterno.style.fill = "#ff0000";
+        }
+    },
+    girarPonteiros: async function (tempoRestante) {
+
+        let a = tempoRestante / 10;
+        let b = tempoRestante * 6;
+
+        desenhoRelogio.ponteiroMinutos.style.transform = `rotate(${a}deg)`;
+        desenhoRelogio.ponteiroSegundos.style.transform = `rotate(${b}deg)`;
+    },
+    piscarDoisPontos: async function () {
+        informacoes.doisPontos.forEach((x) => x.classList.remove("piscar_dois_pontos"));
+        setTimeout(() => {
+            if (tempoRestante > 0) {
+                informacoes.doisPontos.forEach((x) => x.classList.add("piscar_dois_pontos"));
+            }
+        }, 500);
+    },
+    audioECores: async function () {
+        if (tempoRestante >= 307 && tempoRestante <= 309) {
+            audio5minutos.play();
+            desenhoRelogio.corCirculoExterno.forEach((x) => {
+                x.style.transition = "10s";
+                x.style.stopColor = "#00ff00";
+            });
+            desenhoRelogio.corCirculoInterno.style.fill = "#00ff00";
+            desenhoRelogio.corCirculoInterno.style.transition = "10s";
+        }
+
+        if (tempoRestante <= 68 && tempoRestante >= 66) {
+            audio1minuto.play();
+            desenhoRelogio.corCirculoExterno.forEach((x) => {
+                x.style.transition = "10s";
+                x.style.stopColor = "#ffff00";
+            });
+            desenhoRelogio.corCirculoInterno.style.fill = "#ffff00";
+            desenhoRelogio.corCirculoInterno.style.transition = "10s";
+        }
+
+        if (tempoRestante <= 0 && tempoRestante >= -2) {
+            audioEncerramento.volume = 0.5;
+            audioEncerramento.play();
+            desenhoRelogio.corCirculoExterno.forEach((x) => {
+                x.style.transition = "5s";
+                x.style.stopColor = "#ff0000";
+            });
+            desenhoRelogio.corCirculoInterno.style.fill = "#ff0000";
+            desenhoRelogio.corCirculoInterno.style.transition = "5s";
+            informacoes.textoLicao.innerText = "LIÇÃO DA ESCOLA SABATINA ENCERRADA";
+            continuar = false;
+
+            //fecha o programa após um tempo
+            electronJS.autoClose(60000);
+        }
+    }
+}
+
+//enter nos inputs inicia o cronômetro
+campos.campoHoraTermino.addEventListener("keyup", (x) => {
+    if (x.key === "Enter") iniciarHoraTermino();
+});
+campos.campoTempoLimiteHora.addEventListener("keyup", (x) => {
+    if (x.key === "Enter") iniciarDuracao();
+});
+campos.campoTempoLimiteMinuto.addEventListener("keyup", (x) => {
+    if (x.key === "Enter") iniciarDuracao();
+});
+// atalhos de teclado
+document.addEventListener("keydown", async (x) => {
+    if (x.key === "f") {
+        funcoesFullscreen.fullscreen();
+    } else if (x.key === "m" && x.altKey) {
+        electronJS.menu();
+    }
+});
+// fullscreens
+document.addEventListener("fullscreenchange", () => {
+    if (document.fullscreenElement) {
+        alternarBotoesFullScreen.mostrarBtnSairFullscreen();
+        // altera visibilidade dos controles em tela cheia
+        controles.onOff2Tela.style.removeProperty("display");
+        controles.onOff2Tela.classList.add("ocultar");
+        controles.zerar.style.removeProperty("display");
+        controles.zerar.classList.add("ocultar");
+        controles.ajuda.classList.add("ocultar");
+    }
+    else if (!document.fullscreenElement) {
+        alternarBotoesFullScreen.mostrarBtnIrFullscreen();
+        // altera a visibilidade dos controles quando sai da tela cheia
+        if (mostrarControlesFullscreen) {
+            controles.onOff2Tela.style.display = "flex";
+            controles.onOff2Tela.classList.remove("ocultar");
+            controles.zerar.style.display = "flex";
+            controles.zerar.classList.remove("ocultar");
+        }
+        controles.ajuda.classList.remove("ocultar");
+        electronJS.sairSegundaTela();
+    }
+});
+controles.zerar.addEventListener("click", () => {
+    electronJS.progressBar(0);
+    electronJS.cancelAutoClose();
+    location.reload();
+});
+
 
 function mostrarCronometro() {
     cronometro.relogio.style.opacity = 1;
@@ -345,81 +433,5 @@ function calculoTempoRestante(horas, horaTermino) {
         return tempoTermino - tempo;
     } else {
         return (tempoTermino + 86400) - tempo;
-    }
-}
-
-const animacoes = {
-    ajustarCores: async function (horaAtual, horaTermino) {
-        if (calculoTempoRestante(horaAtual, horaTermino) <= 300) {
-            desenhoRelogio.corCirculoExterno.forEach((x) => {
-                x.style.stopColor = "#00ff00";
-            });
-            desenhoRelogio.corCirculoInterno.style.fill = "#00ff00";
-        }
-        if (calculoTempoRestante(horaAtual, horaTermino) <= 60) {
-            desenhoRelogio.corCirculoExterno.forEach((x) => {
-                x.style.stopColor = "#ffff00";
-            });
-            desenhoRelogio.corCirculoInterno.style.fill = "#ffff00";
-        }
-        if (calculoTempoRestante(horaAtual, horaTermino) <= 0) {
-            desenhoRelogio.corCirculoExterno.forEach((x) => {
-                x.style.stopColor = "#ff0000";
-            });
-            desenhoRelogio.corCirculoInterno.style.fill = "#ff0000";
-        }
-    },
-    girarPonteiros: async function (tempoRestante) {
-
-        let a = tempoRestante / 10;
-        let b = tempoRestante * 6;
-
-        desenhoRelogio.ponteiroMinutos.style.transform = `rotate(${a}deg)`;
-        desenhoRelogio.ponteiroSegundos.style.transform = `rotate(${b}deg)`;
-    },
-    piscarDoisPontos: async function () {
-        informacoes.doisPontos.forEach((x) => x.classList.remove("piscar_dois_pontos"));
-        setTimeout(() => {
-            if (tempoRestante > 0) {
-                informacoes.doisPontos.forEach((x) => x.classList.add("piscar_dois_pontos"));
-            }
-        }, 500);
-    },
-    audioECores: async function () {
-        if (tempoRestante >= 307 && tempoRestante <= 309) {
-            audio5minutos.play();
-            desenhoRelogio.corCirculoExterno.forEach((x) => {
-                x.style.transition = "10s";
-                x.style.stopColor = "#00ff00";
-            });
-            desenhoRelogio.corCirculoInterno.style.fill = "#00ff00";
-            desenhoRelogio.corCirculoInterno.style.transition = "10s";
-        }
-
-        if (tempoRestante <= 68 && tempoRestante >= 66) {
-            audio1minuto.play();
-            desenhoRelogio.corCirculoExterno.forEach((x) => {
-                x.style.transition = "10s";
-                x.style.stopColor = "#ffff00";
-            });
-            desenhoRelogio.corCirculoInterno.style.fill = "#ffff00";
-            desenhoRelogio.corCirculoInterno.style.transition = "10s";
-        }
-
-        if (tempoRestante <= 0 && tempoRestante >= -2) {
-            audioEncerramento.volume = 0.5;
-            audioEncerramento.play();
-            desenhoRelogio.corCirculoExterno.forEach((x) => {
-                x.style.transition = "5s";
-                x.style.stopColor = "#ff0000";
-            });
-            desenhoRelogio.corCirculoInterno.style.fill = "#ff0000";
-            desenhoRelogio.corCirculoInterno.style.transition = "5s";
-            informacoes.textoLicao.innerText = "LIÇÃO DA ESCOLA SABATINA ENCERRADA";
-            continuar = false;
-
-            //fecha o programa após um tempo
-            electronJS.autoClose(60000);
-        }
     }
 }

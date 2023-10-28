@@ -3,6 +3,7 @@ const path = require('node:path')
 
 let win;
 let help;
+let tempoFechar;
 
 // criar janela
 const createWindow = () => {
@@ -80,9 +81,13 @@ function comunicMainRenderer() {
 
     // comando para fechar a janela automaticamente
     ipcMain.on('autoClose', (event, tempo) => {
-        setTimeout(() => {
+        tempoFechar = setTimeout(() => {
             app.quit();
         }, tempo);
+    });
+
+    ipcMain.on('cancelAutoClose', () => {
+        if (tempoFechar) clearTimeout(tempoFechar);
     });
 
     // progresso na barra
