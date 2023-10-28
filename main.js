@@ -79,8 +79,13 @@ function comunicMainRenderer() {
     });
 
     // comando para fechar a janela automaticamente
-    ipcMain.on('autoClose', () => app.quit());
+    ipcMain.on('autoClose', (event, tempo) => {
+        setTimeout(() => {
+            app.quit();
+        }, tempo);
+    });
 
+    // progresso na barra
     ipcMain.on('progressBar', (event, t) => {
         if (t < 1800 && t > 0) {
             win.setProgressBar(1 - t / 1800);

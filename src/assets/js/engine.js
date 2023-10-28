@@ -68,11 +68,7 @@ document.addEventListener("keydown", async (x) => {
     if (x.key === "f") {
         funcoesFullscreen.fullscreen();
     } else if (x.key === "m" && x.altKey) {
-        if (window.funcoesWinElectron && await window.funcoesWinElectron.isMenuBarVisible()) {
-            window.funcoesWinElectron.ocultarMenu();
-        } else if (window.funcoesWinElectron && !(await window.funcoesWinElectron.isMenuBarVisible())) {
-            window.funcoesWinElectron.mostrarMenu();
-        }
+        electronJS.menu();
     }
 });
 
@@ -97,22 +93,19 @@ document.addEventListener("fullscreenchange", () => {
             controles.zerar.classList.remove("ocultar");
         }
         controles.ajuda.classList.remove("ocultar");
-        funcoesEletronJS.sairSegundaTela();
+        electronJS.sairSegundaTela();
     }
 });
 controles.zerar.addEventListener("click", () => {
-    window.funcoesWinElectron.progressBar(0);
+    electronJS.progressBar(0);
     location.reload();
 });
 
-const funcoesEletronJS = {
-    mostrarMenu: () => {
-        if (document.fullscreenElement && window.funcoesWinElectron) {
+const electronJS = {
+    menu: async () => {
+        if (window.funcoesWinElectron && !(await window.funcoesWinElectron.isMenuBarVisible())) {
             window.funcoesWinElectron.mostrarMenu();
-        }
-    },
-    ocultarMenu: () => {
-        if (!document.fullscreenElement && window.funcoesWinElectron) {
+        } else if (window.funcoesWinElectron && await window.funcoesWinElectron.isMenuBarVisible()) {
             window.funcoesWinElectron.ocultarMenu();
         }
     },
@@ -125,13 +118,31 @@ const funcoesEletronJS = {
         if (window.funcoesWinElectron && controles.checker2Tela.checked) {
             window.funcoesWinElectron.sairDaSegundaTela();
         }
+    },
+    abrirAjuda: () => {
+        if (window.funcoesWinElectron) {
+            window.funcoesWinElectron.abrirAjuda();
+        }
+    },
+    progressBar: (t) => {
+        if (window.funcoesWinElectron) {
+            window.funcoesWinElectron.progressBar(t);
+        }
+    },
+    autoClose: (tempo) => {
+        if (window.funcoesWinElectron) {
+            window.funcoesWinElectron.autoClose(tempo);
+        }
+    },
+    notificacao: (titulo, corpo) => {
+        new Notification(titulo, { body: corpo });
     }
 }
 
 const funcoesFullscreen = {
     entrarFullscreen: function () {
 
-        funcoesEletronJS.paraSegundaTela();
+        electronJS.paraSegundaTela();
 
         // coloca em tela cheia
         let elem = document.documentElement;
@@ -191,18 +202,15 @@ function mostrarCronometro() {
 }
 
 async function ajuda() {
-    if (window.funcoesWinElectron) {
-        window.funcoesWinElectron.abrirAjuda();
-    } 
+    electronJS.abrirAjuda();
 }
 
 async function iniciarHoraTermino() {
 
-    mostrarCronometro();
-
-    alternarBotoesFullScreen.visibBotoesFullScreen();
-
     if (campos.campoHoraTermino.value) {
+        mostrarCronometro();
+        alternarBotoesFullScreen.visibBotoesFullScreen();
+
         let horaTermino = campos.campoHoraTermino.value.split(":");
         iniciarCronometro([Number(horaTermino[0]), Number(horaTermino[1])]);
     }
@@ -211,12 +219,11 @@ async function iniciarHoraTermino() {
 
 async function iniciarDuracao() {
 
-    mostrarCronometro();
-
-    alternarBotoesFullScreen.visibBotoesFullScreen();
-
     if ((campos.campoTempoLimiteHora.value > 0 || campos.campoTempoLimiteMinuto.value > 0) &&
         (campos.campoTempoLimiteHora.value || campos.campoTempoLimiteMinuto.value)) {
+
+        mostrarCronometro();
+        alternarBotoesFullScreen.visibBotoesFullScreen();
 
         let duracaoHora = campos.campoTempoLimiteHora.value;
         let duracaoMinuto = campos.campoTempoLimiteMinuto.value;
@@ -307,11 +314,12 @@ function imprimirRelogio(horaAtual, horaTermino) {
         if (minutosRestantes < 10) minutosRestantes = `0${minutosRestantes.toString()}`;
         if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
 
-        window.funcoesWinElectron.progressBar(tempoRestante);
+        electronJS.progressBar(tempoRestante);
         animacoes.girarPonteiros(tempoRestante, segundosRestantes);
-
         animacoes.audioECores();
-        animacoes.notificacoes();
+        if (tempoRestante === 360) {
+            electronJS.notificacao('Cronômetro ES', 'Próximo de 5 minutos');
+        }
 
         if (horasRestantes == 0) {
             informacoes.horasRest.innerText = "";
@@ -411,18 +419,7 @@ const animacoes = {
             continuar = false;
 
             //fecha o programa após um tempo
-            if (window.funcoesWinElectron) {
-                setTimeout(() => {
-                    window.funcoesWinElectron.autoClose();
-                }, 60000);
-            }
-        }
-    },
-    notificacoes: async () => {
-        if (tempoRestante === 360) {
-            const notification = new window.Notification('Cronômetro ES', {
-                body: 'Próximo de 5 minutos'
-            });
+            electronJS.autoClose(60000);
         }
     }
 }
