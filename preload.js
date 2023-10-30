@@ -9,6 +9,6 @@ contextBridge.exposeInMainWorld('funcoesWinElectron', {
   isMenuBarVisible: () => ipcRenderer.invoke('isMenuBarVisible'),
   abrirAjuda: () => ipcRenderer.send('abrir-ajuda'),
   progressBar: (t) => ipcRenderer.send('progressBar', t),
-  notificacao: (titulo, corpo) => ipcRenderer.send('notificacao', titulo, corpo),
-  cancelAutoClose: () => ipcRenderer.send('cancelAutoClose')
+  notificacoes: (titulo, corpo) => ipcRenderer.send('notificacoes', titulo, corpo),
+  cancelAutoClose: () => ipcRenderer.send('cancelAutoClose'),
 });

@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="0.16031672"
-     inkscape:cx="221.43667"
-     inkscape:cy="-84.208312"
+     inkscape:zoom="0.11313709"
+     inkscape:cx="517.07183"
+     inkscape:cy="411.00582"
      inkscape:window-width="1366"
      inkscape:window-height="705"
      inkscape:window-x="-8"
@@ -57,38 +57,35 @@
        fx="132.29166"
        fy="132.29166"
        r="132.29166"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.99425998,0,0,0.99425999,0.75935115,0.75932843)" />
   </defs>
   <g
      inkscape:label="circulo-externo"
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       id="g6"
-       inkscape:label="Relógio"
-       style="display:inline;stroke:#ffffff;stroke-opacity:1"
-       transform="matrix(0.95321147,0,0,0.95321147,6.1897256,6.1897256)">
-      <g
-         id="g1">
-        <circle
-           style="display:inline;fill:url(#radialGradient2);stroke:#ffffff;stroke-width:15.7362753;stroke-dasharray:none;stroke-opacity:1"
-           id="path18-1-1"
-           cx="132.29166"
-           cy="132.29166"
-           inkscape:label="path18-1"
-           r="132.29166" />
-        <text
-           xml:space="preserve"
-           style="font-size:74.4985px;font-family:'Segoe Print';-inkscape-font-specification:'Segoe Print';fill:#ffffff;stroke:none;stroke-width:11.4541;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
-           x="23.890524"
-           y="159.35556"
-           id="text1"><tspan
-             sodipodi:role="line"
-             id="tspan1"
-             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Tahoma;-inkscape-font-specification:'Tahoma Bold';stroke:none;stroke-width:11.4541"
-             x="23.890524"
-             y="159.35556">00:00</tspan></text>
-      </g>
+       id="g1">
+      <circle
+         style="display:inline;fill:url(#radialGradient2);stroke:#ffffff;stroke-width:1.5187;stroke-dasharray:none;stroke-opacity:1"
+         id="path18-1-1"
+         cx="132.29166"
+         cy="132.29166"
+         inkscape:label="path18-1"
+         r="131.5323" />
+      <ellipse
+         style="display:inline;fill:none;stroke:#ffffff;stroke-width:22.6094;stroke-dasharray:none;stroke-opacity:1"
+         id="path18-1-1-7"
+         cx="132.29166"
+         cy="132.29166"
+         inkscape:label="path18-1"
+         rx="107.75778"
+         ry="107.75777" />
+      <path
+         style="display:inline;fill:none;stroke:#ffffff;stroke-width:26.4583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+         d="m 91.573329,93.359941 40.718331,38.931719 28.3756,67.15797"
+         id="path1"
+         sodipodi:nodetypes="ccc" />
     </g>
   </g>
 </svg>

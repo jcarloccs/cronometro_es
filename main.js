@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Notification } = require('electron')
 const path = require('node:path')
 
 let win;
@@ -95,5 +95,17 @@ function comunicMainRenderer() {
         if (t < 1800 && t > 0) {
             win.setProgressBar(1 - t / 1800);
         } else win.setProgressBar(0);
+    });
+
+    ipcMain.on('notificacoes', (event, titulo, corpo) => {
+
+        if (Notification.isSupported()) {
+            new Notification({
+                title: titulo,
+                body: corpo,
+                silent: true
+            }).show();
+        }
+
     });
 }

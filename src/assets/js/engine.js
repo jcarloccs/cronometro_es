@@ -50,7 +50,7 @@ const controles = {
 let tempoRestante;
 let mostrarControlesFullscreen = false;
 
-// para a execução do código pra não mostrar tempo negativo
+// pára a execução do código pra não mostrar tempo negativo
 let continuar = true;
 
 const electronJS = {
@@ -98,7 +98,9 @@ const electronJS = {
         }
     },
     notificacao: (titulo, corpo) => {
-        new Notification(titulo, { body: corpo });
+        if (window.funcoesWinElectron) {
+            window.funcoesWinElectron.notificacoes(titulo, corpo);
+        }
     }
 }
 
