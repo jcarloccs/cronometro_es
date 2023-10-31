@@ -7,7 +7,6 @@ let tempoFechar;
 
 // criar janela
 const createWindow = () => {
-    const isSingleInstance = app.requestSingleInstanceLock();
 
     win = new BrowserWindow({
         width: 800,
@@ -60,6 +59,7 @@ function comunicMainRenderer() {
     ipcMain.handle('isMenuBarVisible', () => {
         return win.isMenuBarVisible();
     });
+
     // ir ou voltar da tela extendida
     ipcMain.on('irParaSegundaTela', () => {
         win.restore();
@@ -73,8 +73,10 @@ function comunicMainRenderer() {
     });
     ipcMain.on('sairDaSegundaTela', () => {
         win.restore();
-        win.setPosition(50, 50);
+        win.setPosition(0, 0);
+        win.center();
     });
+
     ipcMain.on('abrir-ajuda', () => {
         createWindowHelp();
     });
@@ -98,7 +100,6 @@ function comunicMainRenderer() {
     });
 
     ipcMain.on('notificacoes', (event, titulo, corpo) => {
-
         if (Notification.isSupported()) {
             new Notification({
                 title: titulo,
@@ -106,6 +107,5 @@ function comunicMainRenderer() {
                 silent: true
             }).show();
         }
-
     });
 }
