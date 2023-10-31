@@ -163,13 +163,13 @@ const alternarBotoesFullScreen = {
 
 const animacoes = {
     ajustarCores: async function (horaAtual, horaTermino) {
-        if (calculoTempoRestante(horaAtual, horaTermino) <= 300) {
+        if (calculoTempoRestante(horaAtual, horaTermino) <= 307) {
             desenhoRelogio.corCirculoExterno.forEach((x) => {
                 x.style.stopColor = "#00ff00";
             });
             desenhoRelogio.corCirculoInterno.style.fill = "#00ff00";
         }
-        if (calculoTempoRestante(horaAtual, horaTermino) <= 60) {
+        if (calculoTempoRestante(horaAtual, horaTermino) <= 66) {
             desenhoRelogio.corCirculoExterno.forEach((x) => {
                 x.style.stopColor = "#ffff00";
             });
@@ -209,7 +209,7 @@ const animacoes = {
             desenhoRelogio.corCirculoInterno.style.transition = "10s";
         }
 
-        if (tempoRestante <= 68 && tempoRestante >= 66) {
+        else if (tempoRestante <= 68 && tempoRestante >= 66) {
             audio1minuto.play();
             desenhoRelogio.corCirculoExterno.forEach((x) => {
                 x.style.transition = "10s";
@@ -219,7 +219,7 @@ const animacoes = {
             desenhoRelogio.corCirculoInterno.style.transition = "10s";
         }
 
-        if (tempoRestante <= 0 && tempoRestante >= -2) {
+        else if (tempoRestante <= 0 && tempoRestante >= -2) {
             audioEncerramento.volume = 0.5;
             audioEncerramento.play();
             desenhoRelogio.corCirculoExterno.forEach((x) => {
@@ -410,7 +410,7 @@ function imprimirRelogio(horaAtual, horaTermino) {
         if (tempoRestante === 360) {
             electronJS.notificacao('Cronômetro ES', 'Próximo de 5 minutos');
         }
-
+        
         if (horasRestantes == 0) {
             informacoes.horasRest.innerText = "";
             informacoes.doisPontos[0].classList.add("ocultar");
