@@ -8,46 +8,25 @@
     src: url(../fonts/Changa/Changa-VariableFont_wght.ttf);
 }
 
-#desenhos, #relogio {
-    opacity: 0.2;
-}
-
 body {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     background-color: black;
 }
 
+#desenhos, #relogio {
+    opacity: 0.2;
+}
+
 #relogio {
-    width: 95vh;
-    height: 95vh;
-    position: relative;
-}
-
-#div_externa {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-
-#div_interna {
     height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     justify-content: space-between;
-}
-
-#texto-licao {
-    width: 50vh;
-    font-weight: bold;
-    margin: 2vh;
 }
 
 img#logo_es {
@@ -55,8 +34,26 @@ img#logo_es {
     margin: 1vh;
 }
 
-h2 {
+.horarios {
+    letter-spacing: 0.5vh;
+    word-spacing: 1vh;
+    font-weight: normal;
+    box-sizing: border-box;
+    font-size: 5vh;
+}
+
+#texto-licao {
+    width: 60vh;
+    font-weight: bold;
+    margin: 2vh;
     font-size: 4.5vh;
+}
+
+#texto-tempo {
+    border: 0.1vh solid white;
+    border-radius: 2vh;
+    padding: 0.5vh 1vh;
+    min-width: 70vh;
 }
 
 .tempo_restante {
@@ -75,6 +72,10 @@ h2 {
 
 .ocultar {
     display: none;
+}
+
+.display-block {
+    display: block;
 }
 
 #desenhos {
@@ -107,14 +108,6 @@ h2 {
     justify-content: space-between;
 }
 
-.horarios {
-    letter-spacing: 0.5vh;
-    word-spacing: 1vh;
-    font-weight: normal;
-    box-sizing: border-box;
-    font-size: 5vh;
-}
-
 #duracao input {
     width: 15vh;
 }
@@ -132,10 +125,6 @@ h2 {
 
 #ponteiro-segundos {
     transition: 500ms;
-}
-
-.organizar {
-    display: block;
 }
 
 button {
@@ -293,9 +282,3 @@ legend {
     margin: auto;
 }
 
-#texto-tempo {
-    border: 0.1vh solid white;
-    border-radius: 2vh;
-    padding: 0.5vh 1vh;
-    min-width: 70vh;
-}

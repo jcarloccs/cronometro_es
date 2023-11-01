@@ -345,9 +345,9 @@ async function iniciarCronometro(horaTermino) {
     informacoes.horario[1].innerText = `Termina às ${horaTermino[0]}:${y}`;
 
     // mostrar ou ocultar os controles
-    controles.horaLimite.classList.remove("organizar");
+    controles.horaLimite.classList.remove("display-block");
     controles.horaLimite.classList.add("ocultar");
-    controles.duracao.classList.remove("organizar");
+    controles.duracao.classList.remove("display-block");
     controles.duracao.classList.add("ocultar");
     controles.fieldsets.forEach((x) => x.classList.add("ocultar"));
     controles.fullscreen.style.display = "flex";
