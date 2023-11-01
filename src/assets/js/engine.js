@@ -249,9 +249,9 @@ campos.campoTempoLimiteMinuto.addEventListener("keyup", (x) => {
 });
 // atalhos de teclado
 document.addEventListener("keydown", async (x) => {
-    if (x.key === "f") {
+    if (x.key === "f" || x.key === "F") {
         funcoesFullscreen.fullscreen();
-    } else if (x.key === "m" && x.altKey) {
+    } else if ((x.key === "m" || x.key === "M") && x.altKey) {
         electronJS.menu();
     }
 });
