@@ -16,8 +16,7 @@ const createWindow = () => {
             preload: path.join(__dirname, 'preload.js')
         }
     });
-
-    win.setMenuBarVisibility(false);
+    win.removeMenu(true);
 
     win.loadFile('./src/index.html');
 }
@@ -27,10 +26,11 @@ const createWindowHelp = () => {
     help = new BrowserWindow({
         parent: win,
         width: 520,
-        height: 574,
+        height: 499,
         maximizable: false,
         minimizable: false,
         useContentSize: true,
+        fullscreenable: false,
         icon: path.join(__dirname, 'src/assets/imgs/favicon.ico'),
     });
     help.setMenuBarVisibility(false);
@@ -49,16 +49,6 @@ app.on('window-all-closed', () => {
 });
 
 function comunicMainRenderer() {
-    // mostrar ou ocultar barra de menu
-    ipcMain.on('ocultar', () => {
-        win.setMenuBarVisibility(false);
-    });
-    ipcMain.on('mostrar', () => {
-        win.setMenuBarVisibility(true);
-    });
-    ipcMain.handle('isMenuBarVisible', () => {
-        return win.isMenuBarVisible();
-    });
 
     // ir ou voltar da tela extendida
     ipcMain.on('irParaSegundaTela', () => {
@@ -107,5 +97,9 @@ function comunicMainRenderer() {
                 silent: true
             }).show();
         }
+    });
+
+    ipcMain.on('abrirFerramentasDev', () => {
+        win.webContents.openDevTools();
     });
 }

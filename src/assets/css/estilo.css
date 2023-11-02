@@ -16,7 +16,23 @@ body {
     background-color: black;
 }
 
-#desenhos, #relogio {
+.elementos svg {
+    width: inherit;
+    height: inherit;
+}
+
+.elementos {
+    width: 95vh;
+    height: 95vh;
+    position: absolute;
+}
+
+#ponteiro-segundos {
+    transition: 500ms;
+}
+
+#desenhos,
+#relogio {
     opacity: 0.2;
 }
 
@@ -49,7 +65,7 @@ img#logo_es {
     font-size: 4.5vh;
 }
 
-#texto-tempo {
+#texto-tempo-restante {
     border: 0.1vh solid white;
     border-radius: 2vh;
     padding: 0.5vh 1vh;
@@ -70,7 +86,8 @@ img#logo_es {
     transition: color 500ms;
 }
 
-.ocultar {
+/* displays */
+.display-none {
     display: none;
 }
 
@@ -92,45 +109,99 @@ img#logo_es {
     z-index: -1;
 }
 
-#controles {
+#controles,
+#ajuda {
     display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 1vh;
-    bottom: 1vh;
     align-items: center;
+    flex-direction: column;
+    bottom: 1vh;
+    position: absolute;
+}
+
+#controles {
+    left: 1vh;
     justify-content: space-between;
 }
 
 #ajuda {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
     right: 1vh;
-    bottom: 1vh;
-    align-items: center;
-    justify-content: space-between;
+    height: 15vh;
+    width: 15vh;
+    justify-content: center;
+    margin: auto;
 }
 
-#duracao input {
+#controles #fullscreen {
+    display: flex;
+    align-items: center;
+    height: 15vh;
+    width: 15vh;
+    justify-content: center;
+    margin: auto;
+}
+
+#controles #fullscreen #entrar-fullscreen,
+#controles #fullscreen #sair-fullscreen,
+#ajuda #botao-ajuda {
+    fill: white;
+    height: 7vh;
+    width: 7vh;
+    cursor: pointer;
+    transition: width 200ms;
+}
+
+#controles #fullscreen #entrar-fullscreen:hover,
+#controles #fullscreen #sair-fullscreen:hover,
+#ajuda #botao-ajuda:hover {
+    fill: yellow;
+    height: 15vh;
     width: 15vh;
 }
 
-.elementos svg {
-    width: inherit;
-    height: inherit;
+#on-off-2-tela {
+    margin-top: 4vh;
+    display: flex;
+    align-items: center;
 }
 
-.elementos {
-    width: 95vh;
-    height: 95vh;
-    position: absolute;
+#on-off-2-tela #text-2-tela,
+#on-off-2-tela #checker-2-tela {
+    margin: 0 1vh 0 1vh;
 }
 
-#ponteiro-segundos {
-    transition: 500ms;
+#on-off-2-tela #text-2-tela {
+    font-size: 2.5vh;
+    letter-spacing: 0.3vh;
+    font-family: 'Changa', sans-serif;
 }
 
+#on-off-2-tela #checker-2-tela {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 4.5vh;
+    height: 4.5vh;
+    background: #FFF;
+    cursor: pointer;
+    border-radius: 1vh;
+    border: 0.5vh solid white;
+}
+
+#on-off-2-tela #checker-2-tela:hover {
+    border: 0.5vh solid rgb(14, 126, 201);
+}
+
+#on-off-2-tela #checker-2-tela:checked {
+    background-color: rgb(14, 126, 201);
+    border: 0.5vh solid white;
+}
+
+#on-off-2-tela #checker-2-tela:checked:hover {
+    border: 0.5vh solid rgb(14, 126, 201);
+    cursor: pointer;
+}
+
+/* buttons */
 button {
     background-color: black;
     border: 0.2vh solid rgb(255, 255, 255);
@@ -144,13 +215,6 @@ button {
 
 button:hover {
     background-color: rgb(63, 63, 63);
-    border: 0.2vh solid rgb(255, 255, 255);
-    border-radius: 1vh;
-    color: rgb(255, 255, 255);
-    font-size: 4.5vh;
-    font-family: 'Changa', sans-serif;
-    padding-left: 2vh;
-    padding-right: 2vh;
     cursor: pointer;
 }
 
@@ -168,61 +232,10 @@ button:hover {
 #zerar button:hover {
     background-color: rgba(255, 255, 0, 0.2);
     border: 0.2vh solid rgb(255, 255, 0);
-    border-radius: 1vh;
-    color: rgb(255, 255, 255);
-    font-size: 3vh;
-    font-family: 'Changa', sans-serif;
-    padding-left: 2vh;
-    padding-right: 2vh;
     cursor: pointer;
 }
 
-#on-off-2-tela {
-    margin-top: 4vh;    
-    display: flex;
-}
-
-#on-off-2-tela #text-2-tela,
-#on-off-2-tela #checker-2-tela {
-    margin: 0 1vh 0 1vh;
-}
-
-#checker-2-tela {
-    all: unset;
-    width: 3vh;
-    height: 3vh;
-    background: #FFF;
-    cursor: pointer;
-    border-radius: 1vh;
-    border: 0.5vh solid white;
-}
-
-#checker-2-tela:hover {
-    width: 3vh;
-    height: 3vh;
-    background: #FFF;
-    cursor: pointer;
-    border-radius: 1vh;
-    border: 0.5vh solid rgb(14, 126, 201);
-}
-
-#checker-2-tela:checked {
-    background-color: rgb(14, 126, 201);
-    border: 0.5vh solid white;
-}
-
-#checker-2-tela:checked:hover {
-    background-color: rgb(14, 126, 201);
-    border: 0.5vh solid rgb(14, 126, 201);
-    cursor: pointer;
-}
-
-#on-off-2-tela #text-2-tela {
-    font-size: 2.5vh;
-    letter-spacing: 0.3vh;
-    font-family: 'Changa', sans-serif;
-}
-
+/* controles para inserir dados */
 #hora-alvo input,
 #duracao input {
     background-color: white;
@@ -233,6 +246,10 @@ button:hover {
     font-family: 'Changa', sans-serif;
     padding-left: 2vh;
     padding-right: 2vh;
+}
+
+#duracao input {
+    width: 15vh;
 }
 
 fieldset {
@@ -259,33 +276,3 @@ legend {
     padding: 0 2vh;
     border-radius: 1vh;
 }
-
-#entrar-fullscreen:hover,
-#sair-fullscreen:hover,
-#botao-ajuda:hover {
-    fill: yellow;
-    height: 15vh;
-    width: 15vh;
-    cursor: pointer;
-}
-
-
-#entrar-fullscreen,
-#sair-fullscreen,
-#botao-ajuda {
-    fill: white;
-    height: 7vh;
-    width: 7vh;
-    transition: width 200ms;
-}
-
-#fullscreen,
-#ajuda {
-    display: flex;
-    height: 15vh;
-    width: 15vh;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-}
-
