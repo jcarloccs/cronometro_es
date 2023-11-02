@@ -9,7 +9,7 @@ const informacoes = {
     minutosRest: document.getElementById("minutos"),
     segundosRest: document.getElementById("segundos"),
     doisPontos: document.querySelectorAll(".dois_pontos"),
-    horario: document.querySelectorAll(".horarios"),
+    horarios: document.querySelectorAll(".horarios"),
     textoLicao: document.getElementById("texto-licao")
 }
 
@@ -44,7 +44,8 @@ const controles = {
     onOff2Tela: document.getElementById("on-off-2-tela"),
     checker2Tela: document.getElementById("checker-2-tela"),
     text2Tela: document.getElementById("checker-2-tela"),
-    ajuda: document.querySelector("#ajuda svg")
+    ajuda: document.querySelector("#ajuda svg"),
+    controlesFuncionando: document.getElementById("controles-funcionando")
 }
 
 let tempoRestante;
@@ -260,9 +261,8 @@ document.addEventListener("fullscreenchange", () => {
     if (document.fullscreenElement) {
         alternarBotoesFullScreen.mostrarBtnSairFullscreen();
         // altera visibilidade dos controles em tela cheia
-        controles.onOff2Tela.style.removeProperty("display");
+        controles.onOff2Tela.classList.remove("display-flex");
         controles.onOff2Tela.classList.add("ocultar");
-        controles.zerar.style.removeProperty("display");
         controles.zerar.classList.add("ocultar");
         controles.ajuda.classList.add("ocultar");
     }
@@ -270,9 +270,8 @@ document.addEventListener("fullscreenchange", () => {
         alternarBotoesFullScreen.mostrarBtnIrFullscreen();
         // altera a visibilidade dos controles quando sai da tela cheia
         if (mostrarControlesFullscreen) {
-            controles.onOff2Tela.style.display = "flex";
+            controles.onOff2Tela.classList.add("display-flex");
             controles.onOff2Tela.classList.remove("ocultar");
-            controles.zerar.style.display = "flex";
             controles.zerar.classList.remove("ocultar");
         }
         controles.ajuda.classList.remove("ocultar");
@@ -342,24 +341,11 @@ async function iniciarCronometro(horaTermino) {
 
     let y = horaTermino[1];
     if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
-    informacoes.horario[1].innerText = `Termina às ${horaTermino[0]}:${y}`;
+    informacoes.horarios[1].innerText = `Termina às ${horaTermino[0]}:${y}`;
 
     // mostrar ou ocultar os controles
-    controles.horaLimite.classList.remove("display-block");
-    controles.horaLimite.classList.add("ocultar");
-    controles.duracao.classList.remove("display-block");
-    controles.duracao.classList.add("ocultar");
     controles.fieldsets.forEach((x) => x.classList.add("ocultar"));
-    controles.fullscreen.style.display = "flex";
-    controles.fullscreen.classList.remove("ocultar");
-    if (!document.fullscreenElement) {
-        controles.onOff2Tela.style.display = "flex";
-        controles.onOff2Tela.classList.remove("ocultar");
-        controles.zerar.style.display = "flex";
-        controles.zerar.classList.remove("ocultar");
-    }
-    controles.controles.style.height = "auto";
-    informacoes.horario.forEach((x) => x.classList.remove("ocultar"));
+    controles.controlesFuncionando.classList.remove("ocultar");
 
     //atualizar cor de acordo com o tempo do início do cronômetro
     let horaAtual = new Date();
@@ -424,7 +410,7 @@ function imprimirRelogio(horaAtual, horaTermino) {
 
     }
 
-    informacoes.horario[0].innerText = `Hora certa = ${horas}:${minutos}:${segundos}`;
+    informacoes.horarios[0].innerText = `Hora certa = ${horas}:${minutos}:${segundos}`;
 }
 
 function calculoTempoRestante(horas, horaTermino) {

@@ -78,6 +78,10 @@ img#logo_es {
     display: block;
 }
 
+.display-flex {
+    display: flex;
+}
+
 #desenhos {
     width: 95vh;
     height: 95vh;
@@ -264,6 +268,7 @@ legend {
     cursor: pointer;
 }
 
+
 #entrar-fullscreen,
 #sair-fullscreen,
 #botao-ajuda {
@@ -275,6 +280,7 @@ legend {
 
 #fullscreen,
 #ajuda {
+    display: flex;
     height: 15vh;
     width: 15vh;
     align-items: center;
