@@ -45,7 +45,8 @@ const controles = {
     checker2Tela: document.getElementById("checker-2-tela"),
     text2Tela: document.getElementById("checker-2-tela"),
     ajuda: document.querySelector("#ajuda svg"),
-    controlesFuncionando: document.getElementById("controles-funcionando")
+    controlesFuncionando: document.getElementById("controles-funcionando"),
+    controles1Tela: document.getElementById("controles-1-tela")
 }
 
 let tempoRestante;
@@ -261,18 +262,14 @@ document.addEventListener("fullscreenchange", () => {
     if (document.fullscreenElement) {
         alternarBotoesFullScreen.mostrarBtnSairFullscreen();
         // altera visibilidade dos controles em tela cheia
-        controles.onOff2Tela.classList.remove("display-flex");
-        controles.onOff2Tela.classList.add("ocultar");
-        controles.zerar.classList.add("ocultar");
+        controles.controles1Tela.classList.add("ocultar");
         controles.ajuda.classList.add("ocultar");
     }
     else if (!document.fullscreenElement) {
         alternarBotoesFullScreen.mostrarBtnIrFullscreen();
         // altera a visibilidade dos controles quando sai da tela cheia
         if (mostrarControlesFullscreen) {
-            controles.onOff2Tela.classList.add("display-flex");
-            controles.onOff2Tela.classList.remove("ocultar");
-            controles.zerar.classList.remove("ocultar");
+            controles.controles1Tela.classList.remove("ocultar");
         }
         controles.ajuda.classList.remove("ocultar");
         electronJS.sairSegundaTela();
