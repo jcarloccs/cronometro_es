@@ -321,7 +321,7 @@ async function iniciarDuracao() {
 
 async function iniciarCronometro(horaTermino) {
 
-    // adiciona click duplo para colocar em tela cheia
+    // adiciona click duplo e tecla F para colocar em tela cheia
     document.querySelector("body").addEventListener("dblclick", funcoesFullscreen.fullscreen);
     document.addEventListener("keydown", async (x) => {
         if (x.key === "f" || x.key === "F") {
@@ -331,8 +331,7 @@ async function iniciarCronometro(horaTermino) {
 
     mostrarControlesFullscreen = true;
 
-    let y = horaTermino[1];
-    if (horaTermino[1] < 10) y = `0${horaTermino[1]}`;
+    let y = horaTermino[1].toString().padStart(2, 0);
     informacoes.horarios[1].innerText = `Termina às ${horaTermino[0]}:${y}`;
 
     // mostrar ou ocultar os controles
@@ -364,23 +363,16 @@ async function iniciarCronometro(horaTermino) {
 
 function imprimirRelogio(horaAtual, horaTermino) {
     let horas = horaAtual.getHours();
-    let minutos = horaAtual.getMinutes().toString().length == 1 ? `0${horaAtual.getMinutes().toString()}` : horaAtual.getMinutes();
-    let segundos = horaAtual.getSeconds().toString().length == 1 ? `0${horaAtual.getSeconds().toString()}` : horaAtual.getSeconds();
+    let minutos = horaAtual.getMinutes().toString().padStart(2, 0);
+    let segundos = horaAtual.getSeconds().toString().padStart(2, 0);
 
     tempoRestante = calculoTempoRestante(horaAtual, horaTermino);
 
     if (tempoRestante >= 0 && continuar) {
 
-        let horasRestantes = '0';
-        let minutosRestantes = '00';
-        let segundosRestantes = '00';
-
-        horasRestantes = Math.trunc(tempoRestante / 3600);
-        minutosRestantes = Math.trunc(tempoRestante / 60) % 60;
-        segundosRestantes = tempoRestante % 60;
-
-        if (minutosRestantes < 10) minutosRestantes = `0${minutosRestantes.toString()}`;
-        if (segundosRestantes < 10) segundosRestantes = `0${segundosRestantes.toString()}`;
+        let horasRestantes = Math.trunc(tempoRestante / 3600);
+        let minutosRestantes = (Math.trunc(tempoRestante / 60) % 60).toString().padStart(2, 0);
+        let segundosRestantes = (tempoRestante % 60).toString().padStart(2, 0);
 
         electronJS.progressBar(tempoRestante);
         animacoes.girarPonteiros(tempoRestante, segundosRestantes);
