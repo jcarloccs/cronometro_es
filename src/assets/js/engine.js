@@ -277,10 +277,6 @@ function mostrarCronometro() {
     cronometro.desenhos.style.opacity = 1;
 }
 
-async function ajuda() {
-    electronJS.abrirAjuda();
-}
-
 async function iniciarHoraTermino() {
 
     if (campos.campoHoraTermino.value) {
@@ -367,7 +363,7 @@ function imprimirRelogio(horaAtual, horaTermino) {
     let segundos = horaAtual.getSeconds().toString().padStart(2, 0);
 
     tempoRestante = calculoTempoRestante(horaAtual, horaTermino);
-
+    
     if (tempoRestante >= 0 && continuar) {
 
         let horasRestantes = Math.trunc(tempoRestante / 3600);
@@ -381,20 +377,24 @@ function imprimirRelogio(horaAtual, horaTermino) {
             electronJS.notificacao('Cronômetro ES', 'Próximo de 5 minutos');
         }
         
-        if (horasRestantes == 0) {
-            informacoes.horasRest.innerText = "";
-            informacoes.doisPontos[0].classList.add("display-none");
-        }
-        else {
-            informacoes.horasRest.innerText = `${horasRestantes}`;
-        }
-        informacoes.minutosRest.innerText = `${minutosRestantes}`;
-        informacoes.segundosRest.innerText = `${segundosRestantes}`;
+        imprimirTempoRestante(horasRestantes, minutosRestantes, segundosRestantes);
         animacoes.piscarDoisPontos();
 
     }
 
     informacoes.horarios[0].innerText = `Hora certa = ${horas}:${minutos}:${segundos}`;
+}
+
+async function imprimirTempoRestante(horasRestantes, minutosRestantes, segundosRestantes) {
+    if (horasRestantes == 0) {
+        informacoes.horasRest.innerText = "";
+        informacoes.doisPontos[0].classList.add("display-none");
+    }
+    else {
+        informacoes.horasRest.innerText = `${horasRestantes}`;
+    }
+    informacoes.minutosRest.innerText = `${minutosRestantes}`;
+    informacoes.segundosRest.innerText = `${segundosRestantes}`;
 }
 
 function calculoTempoRestante(horas, horaTermino) {
