@@ -97,6 +97,7 @@ function comunicMainRenderer() {
                 silent: true
             }).show();
         }
+        console.log(titulo, corpo)
     });
 
     ipcMain.on('abrirFerramentasDev', () => {
